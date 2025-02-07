@@ -2,12 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import logo from '../../../public/logo.svg'
 const Logo = () => {
-  return (
-      <div>
-          <Image src={logo} alt="logo" width={250} height={200}/>
-    </div>
+    return (
+        <div>
+            <Image src={logo} alt="logo" width={250} height={200} />
+        </div>
 
-  )
+    )
 }
 
 export default Logo
