@@ -1,0 +1,15 @@
+.mainBtn {
+    background: #247CFF;
+    color: white;
+    padding: 8px 20px;
+}
+.mainLink{
+    padding-right: 10px;
+    font-size: 20px;
+}
+.primaryBtn{
+    color: #247CFF;
+    background-color: aliceblue;
+    border:1px #247CFF solid  ;
+        padding: 8px 30px;
+}
