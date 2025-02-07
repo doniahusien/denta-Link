@@ -5,7 +5,6 @@ const Button = ({ title, link ,onClick,color}) => {
     const Btn = (
         <button className={`${ style.mainBtn } w-80`} onClick={onClick}>{title}</button>
     )
-
     if (link) {
         return (
             <Link href={link} className={`${style.mainLink} md:text-base`}>
