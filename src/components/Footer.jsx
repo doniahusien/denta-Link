@@ -12,7 +12,7 @@ import face from '../../public/images/icons/facebook.svg'
 import twitter from '../../public/images/icons/twitter.svg'
 import phone from '../../public/images/icons/telephone.svg'
 import msg from '../../public/images/icons/message.svg'
-import logo from '../../public/logo.png'
+import logo from '../../public/logo.svg'
 
 const Footer = () => {
   const pathname = usePathname();
