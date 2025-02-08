@@ -6,7 +6,7 @@ import GuestRoute from '@/components/GuestRoute';
 const loginPage = () => {
   return (
     <GuestRoute>
-      <div className="flex flex-col md:flex-row min-h-screen w-3/4 mx-auto">
+      <div className="flex flex-col md:flex-row min-h-screen  shadow-lg w-3/4 mx-auto bg-blue-50 mt-10 mb-8">
         <LeftImg imgSrc={imgsrc} />
         <LogInForm />
       </div>
