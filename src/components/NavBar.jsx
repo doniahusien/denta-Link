@@ -38,7 +38,7 @@ const NavBar = () => {
                     {link.subLinks && isMarketOpen === link.label && (
                         <ul
                             className={`absolute ${isMobile ? "mt-2 bg-gray-100" : "left-0 mt-2 bg-white shadow-md"} 
-                          p-3 space-y-2 rounded-md ${isMobile ? "" : "w-40"}`}
+                        p-3 space-y-2 rounded-md ${isMobile ? "" : "w-40"}`}
                         >
                             {link.subLinks.map((subLink) => (
                                 <li key={subLink.label}>
@@ -81,7 +81,7 @@ const NavBar = () => {
     );
 
     return (
-        <header className="bg-white">
+        <header className="bg-transparent">
             <div className="container mx-auto flex justify-between items-center py-4 px-6 sm:px-8">
                 {/* Logo */}
                 <div className="flex items-center space-x-2 sm:space-x-4">
