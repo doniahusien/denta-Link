@@ -32,9 +32,9 @@ const LogInForm = () => {
     }
     return (
         <div className="flex-1 flex justify-center items-center p-6">
-            <div className="p-6 rounded-lg max-w-sm w-full">
+            <div className="md:p-6 rounded-lg max-w-sm w-full">
                 <h2 className="text-3xl font-semibold text-center mb-4">Welcome back!</h2>
-                <p className="text-center text-gray-500 mb-4 text-lg">
+                <p className="text-center text-gray-500 mb-4 sm:text-sm md:text-lg">
                     Enter your details to login into your account.
                 </p>
 
@@ -51,7 +51,7 @@ const LogInForm = () => {
                     {loginError && <p className="text-red-500 text-sm mt-2">{loginError}</p>}
 
 
-                    <div className="flex items-center pb-5 justify-between text-sm">
+                    <div className="flex items-center pb-5 justify-between text-sm sm:text-xs md:text-sm">
                         <label className="flex items-center text-gray-600">
                             <input
                                 type="checkbox"
@@ -70,7 +70,7 @@ const LogInForm = () => {
                 </form>
 
 
-                <p className="text-center text-gray-500 mt-3 text-md">
+                <p className="text-center text-gray-500 mt-3 text-md sm:text-sm md:text-base">
                     Don't have an account? <Link href="/signup" className="text-blue-500">Sign up</Link>
                 </p>
             </div>

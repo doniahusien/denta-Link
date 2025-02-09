@@ -1,7 +1,7 @@
 "use client";
 import { Cairo } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Nav/NavBar";
 import TokenCheck from "@/components/TokenCheck"; 
 import { Provider } from "react-redux";
 import store from "@/redux/store";

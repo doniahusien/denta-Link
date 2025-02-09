@@ -67,7 +67,7 @@ const SignUpForm = () => {
 
     return (
 
-        <div className="flex-1 flex justify-center items-center p-8 md:pl-8">
+        <div className="flex-1 flex justify-center items-center lg:p-8 lg:pl-8">
             <div className=" p-8 rounded-lg max-w-lg w-full">
                 <h2 className="text-3xl font-bold text-center mb-4">Create Account</h2>
                 <p className="text-center text-gray-600 mb-6">
@@ -102,7 +102,7 @@ const SignUpForm = () => {
                         {error.academicYear && <p className="text-red-500 text-xs mt-1">{error.academicYear}</p>}
                     </div>
 
-    
+
                     <div>
                         <Label text="Email Address " />
                         <Input type="email" placeholder="example@gmail.com" value={formData.email} name="email" onChange={handleChange} />
@@ -112,14 +112,14 @@ const SignUpForm = () => {
 
                     <div>
                         <Label text="Password" />
-                        <Input type="text"  isPasswordField name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                        <Input type="text" isPasswordField name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
                     </div>
                     {error.password && <p className="text-red-500 text-xs mt-1">{error.password}</p>}
 
-                    
+
                     <div>
                         <Label text="Confirm Password " />
-                        <Input type="text"  isPasswordField name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} />
+                        <Input type="text" isPasswordField name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} />
                     </div>
                     {error.confirmPassword && <p className="text-red-500 text-xs mt-1">{error.confirmPassword}</p>}
 
@@ -143,16 +143,19 @@ const SignUpForm = () => {
                             <Image src={fileId} alt="file icon" width={25} height={25} />
                             <span>Upload Your Student ID</span>
                         </label>
-                        <div className="flex items-center justify-between border border-gray-300 rounded-lg px-5 py-3 bg-[#EFFFF7]">
+                        <div className="flex flex-col md:flex-row items-center justify-between border border-gray-300 rounded-lg px-4 md:px-5 py-3 bg-[#EFFFF7] space-y-3 md:space-y-0">
                             <div className="flex items-center space-x-2">
-                                <Image src={fileSrc} alt="file" width={25} height={25} />
-                                <p className="text-sm text-gray-600">Only .jpg and .png files</p>
+                                <Image src={fileSrc} alt="file" width={23} height={23} />
+                                <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                                    Only .jpg and .png files
+                                </p>
                             </div>
-                            <label className="bg-[#34FF9D] text-black py-1 px-4 rounded-lg cursor-pointer hover:bg-green-500 transition duration-200">
+                            <label className="bg-[#34FF9D] text-black text-xs sm:text-sm md:text-base py-1 px-3 md:px-5 rounded-md cursor-pointer hover:bg-green-500 transition duration-200">
                                 Choose File
                                 <input type="file" accept=".jpg,.png" className="hidden" onChange={handleFileChange} />
                             </label>
                         </div>
+
                     </div>
                     {error.universityID && <p className="text-red-500 text-xs mt-1">{error.universityID}</p>}
 
