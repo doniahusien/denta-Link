@@ -14,7 +14,7 @@ const NavLinks = ({ isMobile = false }) => {
     };
 
     return (
-        <ul className={`${isMobile ? "space-y-4" : "flex space-x-6"}`}>
+        <ul className={`${isMobile ? "space-y-4" : "flex space-x-6"} mt-5`}>
             {mainLinks.map((link) => (
                 <li key={link.label} className={`relative ${!isMobile && link.subLinks ? "group" : ""}`}>
                     <div

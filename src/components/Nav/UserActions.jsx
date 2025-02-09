@@ -11,7 +11,7 @@ const UserActions = ({ isMobile = false }) => {
     const { token } = useSelector((state) => state.auth);
 
     return (
-        <div className={`flex ${isMobile ? "flex-col space-y-6" : "space-x-6"}`}>
+        <div className={`flex ${isMobile ? "flex-col space-y-6" : "space-x-6"} mt-5`}>
             {token ? (
                 <>
                     <Link href="/cart" className="flex items-center text-blue-600">
