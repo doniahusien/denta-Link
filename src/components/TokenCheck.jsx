@@ -1,10 +1,12 @@
 "use client";
-import { useSelector } from "react-redux";
-import Footer from "@/components/Footer";
+import { usePathname } from "next/navigation";
+import Footer from "@/components/Footer/Footer";
 
 export default function TokenCheck() {
-  const { token } = useSelector((state) => state.auth);
-  
-  if (!token) return null;  
+  const pathname = usePathname();
+  const authPages = ["/login", "/signup", "/reset","/forget","/verify"];
+  const isAuthPage = authPages.some((path) => pathname.startsWith(path));
+
+  if ( isAuthPage) return null;  
   return <Footer />;
 }
