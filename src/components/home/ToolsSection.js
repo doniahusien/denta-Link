@@ -1,34 +1,102 @@
+import React, { memo } from 'react';
 import Image from "next/image";
 
-export default function ToolsSection() {
+// Optimized ImageComponent
+const ImageComponent = memo(({ src, alt, width, height, className }) => {
+  if (!src) return null;
+  
   return (
-    <section className="py-10 md:py-[50px]">
+    <div className="relative">
+      <Image
+        src={src}
+        alt={alt || ""}
+        width={width}
+        height={height}
+        className={`object-contain ${className || ""}`}
+        loading="lazy"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        quality={85}
+      />
+    </div>
+  );
+});
+
+// Optimized TextComponent
+const TextComponent = memo(({ title, description, className, linkUrl, linkLabel }) => (
+  <div className="flex flex-col">
+    {title && <h2 className={className}>{title}</h2>}
+    {description && <p className="text-gray-600 mb-6">{description}</p>}
+    {linkUrl && linkLabel && (
+      <a
+        href={linkUrl}
+        className="inline-flex items-center text-blue-500 hover:text-blue-600 transition-colors"
+      >
+        {linkLabel}
+        <svg
+          className="ml-2 w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </a>
+    )}
+  </div>
+));
+
+// Optimized ToolsSection
+const ToolsSection = memo(({
+  imageSrc,
+  imageAlt,
+  imageWidth,
+  imageHeight,
+  imageClassName,
+  title,
+  description,
+  textClassName,
+  reverseOrder,
+  linkUrl,
+  linkLabel,
+}) => {
+  return (
+    <section className="py-[30px] md:py-[50px]">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-[100px]">
-          {/* Image */}
-          <div className="w-full md:w-auto">
-            <Image
-              src="/images/Home/tools.svg"
-              alt="Dental tools"
-              width={491}
-              height={327}
-              className="object-contain w-[300px] h-[200px] md:w-[491px] md:h-[327px]"
+        <div
+          className={`flex flex-col ${
+            reverseOrder ? "md:flex-row-reverse" : "md:flex-row"
+          } items-center gap-[30px] md:gap-[100px]`}
+        >
+          {imageSrc && (
+            <ImageComponent
+              src={imageSrc}
+              alt={imageAlt}
+              width={imageWidth}
+              height={imageHeight}
+              className={imageClassName}
             />
-          </div>
-          {/* Text Content */}
-          <div className="max-w-[615px] text-center md:text-left">
-            <h2 className="font-cairo text-[28px] leading-[36px] md:text-[40px] md:leading-[48px] font-semibold mb-4">
-              Buy, sell, or exchange dental tools,
-              <br />
-              all in one convenient platform.
-            </h2>
-            <p className="font-cairo text-[18px] leading-[24px] md:text-[32px] md:leading-[36px] text-[#918E8E]">
-              Turn your dental training into real-life success stories, with{" "}
-              <span className="text-[#247CFF]">DENTALINK</span>
-            </p>
-          </div>
+          )}
+          <TextComponent
+            title={title}
+            description={description}
+            className={textClassName}
+            linkUrl={linkUrl}
+            linkLabel={linkLabel}
+          />
         </div>
       </div>
     </section>
   );
-}
+});
+
+// Add display names for debugging
+ImageComponent.displayName = 'ImageComponent';
+TextComponent.displayName = 'TextComponent';
+ToolsSection.displayName = 'ToolsSection';
+
+export default ToolsSection;

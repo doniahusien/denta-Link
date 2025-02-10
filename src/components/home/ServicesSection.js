@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ServicesSection() {
   return (
-    <section className="py-10 md:py-20">
+    <section className="py-10 md:py-20 animate-on-scroll">
       <div className="container mx-auto px-4">
         <h2 className="font-cairo text-[32px] md:text-[48px] leading-[140%] md:leading-[165.6%] font-medium text-center mb-10 md:mb-20">
           Our Services

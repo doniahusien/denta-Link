@@ -3,7 +3,7 @@ import Button from "@/components/UI/Button/Button";
 
 export default function ConnectSection() {
   return (
-    <section className="py-10 md:py-20">
+    <section className="py-10 md:py-20 animate-on-scroll">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Text Content */}

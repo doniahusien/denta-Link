@@ -10,7 +10,7 @@ export default function LinkComponent({ url, label, className }) {
       className={`inline-block ${className || ""}`}
       style={{
         opacity: 1,
-        fontFamily: "Cairo, sans-serif",
+        fontFamily: "'Cairo', sans-serif",
         fontSize: "16px",
         fontWeight: "400",
         lineHeight: "24px", 

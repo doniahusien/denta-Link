@@ -9,11 +9,11 @@ export default function TextComponent({
 }) {
   return (
     <div className={`max-w-[615px] ${className || ""}`}>
-      <h2 className="font-cairo text-[28px] leading-[32px] md:text-[40px] md:leading-[48px] font-semibold mb-4">
+      <h2 className="font-['cairo'] text-[28px] leading-[32px] md:text-[40px] md:leading-[48px] font-semibold mb-4">
         {title}
       </h2>
       <p
-        className="font-cairo text-[18px] leading-[24px] md:text-[32px] md:leading-[36px] text-[#918E8E]"
+        className="font-['cairo'] text-[18px] leading-[24px] md:text-[32px] md:leading-[36px] text-[#918E8E]"
         dangerouslySetInnerHTML={{ __html: description }}
       />
       {linkUrl && linkLabel && (
@@ -21,7 +21,7 @@ export default function TextComponent({
           <LinkComponent
             url={linkUrl}
             label={linkLabel}
-            className="font-cairo text-[#247CFF] text-[16px] md:text-[20px] hover:underline"
+            className="font-['cairo'] text-[#247CFF] text-[16px] md:text-[20px] hover:underline"
           />
         </div>
       )}

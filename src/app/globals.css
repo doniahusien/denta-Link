@@ -1,11 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -18,4 +22,44 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Cairo', Helvetica, sans-serif;
+}
+/* Ensure the hero section always fills the viewport */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Prevent content from overflowing on smaller screens */
+@media (max-height: 600px) {
+  .hero-section .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+/* Ensure the Earth image stays centered and proportional */
+.hero-section img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Adjust spacing for smaller screens */
+@media (max-width: 768px) {
+  .hero-section .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+/* Prevent the Earth image from overlapping text on very small screens */
+@media (max-width: 600px) {
+  .hero-section .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-section .image-container {
+    margin-top: 2rem;
+  }
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function LatestCases({ cases = [] }) {
   return (
-    <section className="py-10 md:py-20 bg-gray-50">
+    <section className="py-10 md:py-20 bg-gray-50 animate-on-scroll">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center">
           Latest cases
