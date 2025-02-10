@@ -6,7 +6,7 @@ import DetailInfo from '@/components/UI/DetailInfo';
 import PublisherInfo from '@/components/market/PublisherInfo';
 import Reviews from '@/components/market/Reviews';
 import RelatedProducts from '@/components/market/RelatedProducts';
-import img from '../../../../../public/images/market/tool.svg';
+
 
 const ToolDetails = () => {
     const { id } = useParams();
