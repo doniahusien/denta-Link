@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 const suggestedProducts = [
   { id: 1, name: "Curette", price: 200, description: "Used for deep cleaning", image: "curette.svg" },
-  { id: 2, name: "Scaler", price: 250, description: "Removes plaque and tartar", image: "scaler.svg" },
+  { id: 2, name: "Scaler", price: 250, description: "Removes plaque and tartar", image: "curette.svg" },
 ];
 
 const SuggestedProducts = () => {

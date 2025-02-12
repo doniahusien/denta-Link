@@ -32,7 +32,7 @@ const OrderSuccess = () => {
   // }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+    <div className="flex justify-center items-center min-h-screen my-44  p-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
