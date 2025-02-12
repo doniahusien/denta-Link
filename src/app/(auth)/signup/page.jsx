@@ -6,7 +6,7 @@ import GuestRoute from '@/components/GuestRoute';
 const signupPage = () => {
   return (
     <GuestRoute>
-      <div className="flex flex-col md:flex-row shadow-lg mt-10 mb-5 min-h-screen md:mx-10 md:px-5">
+      <div className="flex flex-col md:flex-row shadow-lg mt-40 mb-5 min-h-screen md:mx-10 md:px-5">
         <LeftImg imgSrc={imgsrc} />
         <SignUpForm />
       </div>
