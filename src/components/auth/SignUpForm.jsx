@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+
 import Link from 'next/link'
 //phone input
 import PhoneInput from 'react-phone-input-2';
@@ -9,6 +10,7 @@ import 'react-phone-input-2/lib/style.css';
 import Input from './Input'
 import Label from './Label'
 import SubmitBtn from './SubmitBtn'
+import FileInput from '../UI/FileInput';
 
 //images
 import Image from 'next/image'
@@ -137,26 +139,7 @@ const SignUpForm = () => {
                     </div>
                     {error.phone && <p className="text-red-500 text-xs mt-1">{error.phone}</p>}
 
-
-                    <div>
-                        <label className="block text-gray-700 mb-2 flex items-center space-x-2">
-                            <Image src={fileId} alt="file icon" width={25} height={25} />
-                            <span>Upload Your Student ID</span>
-                        </label>
-                        <div className="flex flex-col md:flex-row items-center justify-between border border-gray-300 rounded-lg px-4 md:px-5 py-3 bg-[#EFFFF7] space-y-3 md:space-y-0">
-                            <div className="flex items-center space-x-2">
-                                <Image src={fileSrc} alt="file" width={23} height={23} />
-                                <p className="text-xs sm:text-sm md:text-base text-gray-600">
-                                    Only .jpg and .png files
-                                </p>
-                            </div>
-                            <label className="bg-[#34FF9D] text-black text-xs sm:text-sm md:text-base py-1 px-3 md:px-5 rounded-md cursor-pointer hover:bg-green-500 transition duration-200">
-                                Choose File
-                                <input type="file" accept=".jpg,.png" className="hidden" onChange={handleFileChange} />
-                            </label>
-                        </div>
-
-                    </div>
+                    <FileInput onChange={handleFileChange} label="Upload Your Student ID" />
                     {error.universityID && <p className="text-red-500 text-xs mt-1">{error.universityID}</p>}
 
 

@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={cairo.variable}>
-      <body className={`${isAuthPage ? "bg-[#d3e5ff]" : "bg-white"} flex flex-col min-h-screen font-cairo`}>
+      <body className={`${isAuthPage ? "bg-[#d3e5ff]" : ""} flex flex-col min-h-screen font-cairo`}>
         <Provider store={store}>
           <NavBar />
           <main className="flex-grow">{children}</main>
