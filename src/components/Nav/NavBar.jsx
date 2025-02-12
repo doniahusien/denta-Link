@@ -12,7 +12,7 @@ const NavBar = () => {
     const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
     return (
-        <header className="bg-white shadow-md">
+        <header className=" bg-transparent absolute top-0 left-0 z-10 w-full">
             <div className="container mx-auto flex justify-between items-center py-4 px-6 sm:px-8">
                 <Logo />
                 <button onClick={toggleMenu} className="lg:hidden text-gray-800 focus:outline-none">

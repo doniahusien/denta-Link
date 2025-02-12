@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowUpRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
-import Wavy from 'react-wavify';
 
 const Footer = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -24,7 +23,7 @@ const Footer = () => {
       handleScroll();
       handleVisibility();
     });
-    handleVisibility(); // Check initial visibility
+    handleVisibility(); 
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
