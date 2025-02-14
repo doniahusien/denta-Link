@@ -1,12 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchPatientsByTitle } from "@/redux/features/patient/patientThunk";
+import { setSearchTerm } from "@/redux/features/patient/patientSlice";
+
 import Link from "next/link";
 
-const SearchInput = ({href}) => {
-  const [srch, setSrchval] = useState("");
+const SearchInput = ({ href, title, placeholder }) => {
+  const dispatch = useDispatch();
+  const searchTerm = useSelector((state) => state.patient.searchTerm);
 
   const handleSearch = (e) => {
-    setSrchval(e.target.value);
+    const value = e.target.value;
+    dispatch(setSearchTerm(value));
+    if (value.length >= 3) {
+      dispatch(fetchPatientsByTitle(value)); 
+    }
   };
 
   return (
@@ -15,8 +24,8 @@ const SearchInput = ({href}) => {
         <div className="flex flex-wrap md:flex-nowrap justify-around items-center shadow-xl rounded-lg px-4 py-3 bg-white w-full md:w-2/3 lg:w-1/2 space-x-0 md:space-x-7">
           <input
             type="text"
-            placeholder="Search for Tool"
-            value={srch}
+            placeholder={placeholder}
+            value={searchTerm}
             onChange={handleSearch}
             className="w-full md:w-2/3 px-4 py-2 text-gray-700 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-3 md:mb-0"
           />
@@ -24,7 +33,7 @@ const SearchInput = ({href}) => {
             href={href}
             className="bg-blue-500 text-white w-full md:w-auto text-center px-4 py-2 rounded-md text-sm hover:bg-blue-600"
           >
-            Add Tool
+            {title}
           </Link>
         </div>
       </div>
@@ -33,5 +42,4 @@ const SearchInput = ({href}) => {
 };
 
 export default SearchInput;
-``
 

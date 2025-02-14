@@ -6,7 +6,7 @@ import DetailInfo from '@/components/UI/DetailInfo';
 import PublisherInfo from '@/components/market/PublisherInfo';
 import Reviews from '@/components/market/Reviews';
 import RelatedProducts from '@/components/market/RelatedProducts';
-
+import Fav from '@/components/UI/Fav';
 
 const ToolDetails = () => {
     const { id } = useParams();
@@ -42,7 +42,11 @@ const ToolDetails = () => {
                 <div className="flex flex-col sm:gap-5 md:gap-10 lg:gap-16">
                     {/* Row 1: Image & Info */}
                     <div className="flex flex-col lg:flex-row gap-20 shadow-lg">
-                        <DetailImage image={tool.image} alt={tool.name} />
+                        <div className='relative'>
+                            <DetailImage image={tool.image} alt={tool.name} />
+                        <Fav />
+                        </div>
+                        
                         <DetailInfo
                             name={tool.name}
                             price={tool.price}
