@@ -1,21 +1,32 @@
-'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import EditForm from './EditForm'; 
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import EditForm from "./EditForm";
 
-const ToolCard = ({ imageSrc, name, price, category, description }) => {
+const Card = ({ 
+  type, 
+  imageSrc, 
+  name, 
+  additionalFields, 
+  description, 
+  onEdit 
+}) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
 
+  const handleSave = (updatedData) => {
+    onEdit(updatedData); 
+    setIsFormVisible(false);
+  };
+
   return (
     <div className="mb-6 ml-6">
-      {/* Card */}
       <div className="flex items-start gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white w-[680px]">
         {/* Image Section */}
-        <div className="relative w-24 h-24">
+        <div className="relative w-32 h-24">
           <Image
             src={imageSrc}
             alt={name}
@@ -23,8 +34,6 @@ const ToolCard = ({ imageSrc, name, price, category, description }) => {
             objectFit="contain"
             className="rounded-lg"
           />
-
-          {/* Camera Icon */}
           <div className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500">
             <Image
               src="/images/icons/profile/camera.svg"
@@ -37,15 +46,26 @@ const ToolCard = ({ imageSrc, name, price, category, description }) => {
 
         {/* Details Section */}
         <div className="flex-1">
-          <p className="text-sm text-gray-500">Tool name: <span className="font-semibold text-gray-700">{name}</span></p>
-          <p className="text-sm text-gray-500">Price: <span className="font-semibold text-blue-600">{price}</span></p>
-          <p className="text-sm text-gray-500">Category: <span className="font-semibold text-gray-700">{category}</span></p>
-          <p className="text-sm text-gray-500">Description: <span className="text-gray-700">{description}</span></p>
+          <p className="text-sm text-gray-500">
+            {type === "tool" ? "Tool name:" : "Patient name:"}{" "}
+            <span className="font-semibold text-gray-700">{name}</span>
+          </p>
+
+          {/* Dynamic Fields */}
+          {additionalFields.map(({ label, value, color }, index) => (
+            <p key={index} className="text-sm text-gray-500">
+              {label}: <span className={`font-semibold ${color}`}>{value}</span>
+            </p>
+          ))}
+
+          <p className="text-sm text-gray-500">
+            Description: <span className="text-gray-700">{description}</span>
+          </p>
         </div>
 
         {/* Edit Icon */}
         <button onClick={toggleForm}>
-          <Image 
+          <Image
             src="/images/icons/profile/edit.svg"
             alt="Edit"
             width={20}
@@ -57,11 +77,17 @@ const ToolCard = ({ imageSrc, name, price, category, description }) => {
 
       {/* Edit Form Component */}
       {isFormVisible && (
-        <EditForm 
-          name={name} 
-          price={price} 
-          category={category} 
-          description={description} 
+        <EditForm
+          fields={[
+            { name: "name", label: "Name", value: name },
+            ...additionalFields.map(({ label, value }) => ({
+              name: label.toLowerCase().replace(" ", "_"),
+              label,
+              value,
+            })),
+            { name: "description", label: "Description", value: description },
+          ]}
+          onSave={handleSave}
           onClose={() => setIsFormVisible(false)}
         />
       )}
@@ -69,4 +95,4 @@ const ToolCard = ({ imageSrc, name, price, category, description }) => {
   );
 };
 
-export default ToolCard;
+export default Card;
