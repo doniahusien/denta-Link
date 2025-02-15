@@ -5,7 +5,7 @@ import CartItem from '@/components/cart/cartItem';
 import SuggestedProducts from '@/components/cart/SuggestedProducts';
 import EmptyCart from '@/components/cart/emptyCart';
 import Button from "@/components/UI/Button/Button";
-
+import ProtectedRoute from '@/components/ProtectedRoute';
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([
     {
@@ -37,6 +37,7 @@ const CartPage = () => {
   };
 
   return (
+    <ProtectedRoute>
     <div className="max-w-4xl mx-auto my-40 p-4 md:p-6">
       <h2 className="text-2xl font-semibold">Cart ({cartItems.length})</h2>
 
@@ -55,7 +56,8 @@ const CartPage = () => {
       )}
 
       <SuggestedProducts />
-    </div>
+      </div>
+      </ProtectedRoute>
   );
 };
 

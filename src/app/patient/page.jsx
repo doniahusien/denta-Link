@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import HeaderSection from '@/components/UI/HeaderSection'
 import SearchInput from '@/components/UI/SearchInput'

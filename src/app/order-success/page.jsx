@@ -1,5 +1,6 @@
 "use client";
 
+import ProtectedRoute from "@/components/ProtectedRoute";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -32,6 +33,7 @@ const OrderSuccess = () => {
   // }, []);
 
   return (
+    <ProtectedRoute>
     <div className="flex justify-center items-center min-h-screen my-44  p-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -130,7 +132,8 @@ const OrderSuccess = () => {
           Back to Home
         </motion.button>
       </motion.div>
-    </div>
+      </div>
+      </ProtectedRoute>
   );
 };
 

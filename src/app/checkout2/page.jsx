@@ -1,5 +1,5 @@
 "use client";
-
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -39,6 +39,7 @@ const PaymentPage = () => {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex flex-col items-center justify-center min-h-screen my-44 bg-gray-100 p-6">
       <div className="bg-white shadow-lg rounded-lg p-10 max-w-4xl w-full flex flex-col md:flex-row items-center">
         
@@ -104,7 +105,8 @@ const PaymentPage = () => {
           )}
         </div>
       </div>
-    </div>
+      </div>
+      </ProtectedRoute>
   );
 };
 

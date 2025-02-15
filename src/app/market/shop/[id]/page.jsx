@@ -7,7 +7,7 @@ import PublisherInfo from '@/components/market/PublisherInfo';
 import Reviews from '@/components/market/Reviews';
 import RelatedProducts from '@/components/market/RelatedProducts';
 import Fav from '@/components/UI/Fav';
-
+import ProtectedRoute from '@/components/ProtectedRoute';
 const ToolDetails = () => {
     const { id } = useParams();
 
@@ -35,6 +35,7 @@ const ToolDetails = () => {
     ];
 
     return (
+        <ProtectedRoute>
         <div className="max-w-7xl mx-auto py-44">
             <div className="space-y-12">
                 <h2 className="text-3xl font-semibold pl-10">Product details</h2>
@@ -72,7 +73,8 @@ const ToolDetails = () => {
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+            </ProtectedRoute>
     );
 };
 

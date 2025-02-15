@@ -4,7 +4,7 @@ import { useState } from "react";
 import CartItem from "@/components/cart/cartItem";
 import Button from "@/components/UI/Button/Button";
 import { motion } from "framer-motion";
-
+import ProtectedRoute from "@/components/ProtectedRoute";
 const CheckoutPage = () => {
   const [cartItems, setCartItems] = useState([
     {
@@ -31,6 +31,7 @@ const CheckoutPage = () => {
   const total = productTotal + DELIVERY_FEE - DISCOUNT;
 
   return (
+    <ProtectedRoute>
     <motion.div
       className="max-w-4xl mx-auto p-4 my-40 md:p-6"
       initial={{ opacity: 0, y: 20 }}
@@ -90,7 +91,8 @@ const CheckoutPage = () => {
       >
         <Button title="Confirm" link="checkout2" className="w-full py-3 text-lg" />
       </motion.div>
-    </motion.div>
+      </motion.div>
+      </ProtectedRoute>
   );
 };
 
