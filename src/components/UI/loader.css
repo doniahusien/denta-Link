@@ -1,0 +1,84 @@
+.tooth {
+    width: 100px;
+    height: 120px;
+    background: #ffffff;
+    border-radius: 50% 50% 40% 40%;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: tooth-bounce 2s infinite;
+  }
+  
+  .tooth-root {
+    width: 30px;
+    height: 50px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* فرشة الأسنان */
+  .brush {
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: -50px;
+    left: -60px;
+    animation: brush-move 2s infinite;
+  }
+  
+  .brush-handle {
+    width: 70px;
+    height: 12px;
+    background: #4c8bf5;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  
+  .brush-head {
+    width: 35px;
+    height: 18px;
+    background: #ff6b6b;
+    border-radius: 3px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* أنيميشن الفرشة */
+  @keyframes brush-move {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(25px, -15px) rotate(-20deg);
+    }
+    50% {
+      transform: translate(50px, -30px) rotate(-40deg);
+    }
+    75% {
+      transform: translate(25px, -15px) rotate(-20deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+  
+  /* أنيميشن نط خفيف للضرس */
+  @keyframes tooth-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
