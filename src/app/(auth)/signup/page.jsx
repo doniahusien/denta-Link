@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import LeftImg from '@/components/UI/LeftImg';
 import imgsrc from "../../../../public/images/signup.svg";

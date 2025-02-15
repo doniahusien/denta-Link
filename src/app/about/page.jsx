@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import HeroSection from "@/components/about/hero/HeroSection";
 import ToolsSection from "@/components/about/stuff/ToolsSection";
 import { debounce } from 'lodash';
-
+import ProtectedRoute from "@/components/ProtectedRoute";
 // Pre-define the tools sections data
 const TOOLS_SECTIONS = [
   {
@@ -71,6 +71,7 @@ const AboutPage = () => {
   }, [handleScroll]);
 
   return (
+    <ProtectedRoute>
     <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <div className="relative">
         {/* Performance optimized background elements */}
@@ -118,6 +119,7 @@ const AboutPage = () => {
         }
       `}</style>
     </div>
+    </ProtectedRoute>
   );
 };
 

@@ -1,9 +1,12 @@
-// app/(profile)/profile/page.jsx
+
+"use client";
+import ProtectedRoute from '@/components/ProtectedRoute';
 import ContentBox from '@/components/UI/profile/ContentBox';
 import ToolCard from '@/components/profile/ToolCard';
 export default function ProfilePage() {
 
   return (
+    <ProtectedRoute>
     <ContentBox title="Tools">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <ToolCard 
@@ -15,6 +18,7 @@ export default function ProfilePage() {
         editLink="/edit/mirror"  
       />
       </div>
-    </ContentBox>
+      </ContentBox>
+      </ProtectedRoute>
   );
 }

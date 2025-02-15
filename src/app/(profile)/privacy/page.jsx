@@ -1,7 +1,8 @@
-// app/(profile)/profile/page.jsx
+"use client";
+
 import ContentBox from '@/components/UI/profile/ContentBox';
 import PrivacyCard from '@/components/profile/PrivacyCard';
-
+import ProtectedRoute from '@/components/ProtectedRoute';
 export default function ProfilePage() {
   const policySections = [
     {
@@ -58,6 +59,7 @@ export default function ProfilePage() {
   ];
 
   return (
+    <ProtectedRoute>
     <ContentBox title="Privacy Policy">
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
         {policySections.map((section, index) => (
@@ -65,5 +67,6 @@ export default function ProfilePage() {
         ))}
       </div>
     </ContentBox>
+    </ProtectedRoute>
   );
 }

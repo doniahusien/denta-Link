@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser,signupUser,resetPassword,forgetPassword,verifyOtp,logoutUser } from "./authThunk";
+import { loginUser, signupUser, resetPassword, forgetPassword, verifyOtp, logoutUser } from "./authThunk";
 
 
 const initialState = {
@@ -12,12 +12,16 @@ const initialState = {
     forgetError: null,
     verifyError: null,
     resetError: null
-}
+};
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        setToken: (state, action) => {
+            state.token = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(loginUser.pending, (state) => {
             state.loading = true;
@@ -26,7 +30,9 @@ const authSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loading = false;
                 state.token = action.payload.accessToken;
-                console.log("success", state.token);
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('token', action.payload.accessToken);
+                }
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loginError = action.payload;
@@ -43,6 +49,9 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.signupSuccess = action.payload.message;
                 state.token = action.payload.token;
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('token', action.payload.accessToken);
+                }
             })
             .addCase(signupUser.rejected, (state, action) => {
                 state.error = action.payload;
@@ -57,9 +66,10 @@ const authSlice = createSlice({
             })
             .addCase(logoutUser.fulfilled, (state) => {
                 state.loading = false;
-                console.log("logout ");
-
                 state.token = null;
+                if (typeof window !== 'undefined') {
+                    localStorage.removeItem('token');
+                }
             })
             .addCase(logoutUser.rejected, (state, action) => {
                 state.loading = false;
@@ -95,12 +105,12 @@ const authSlice = createSlice({
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.loading = false;
-                if (action.payload.message =="OTP verified successfully") {
+                if (action.payload.message == "OTP verified successfully") {
                     state.successMsg = action.payload.message;
-                } else if(action.payload.message=="Invalid or expired OTP"){
+                } else if (action.payload.message == "Invalid or expired OTP") {
                     state.verifyError = action.payload.message;
                 }
-                
+
             })
             .addCase(verifyOtp.rejected, (state, action) => {
                 state.loading = false;
@@ -124,4 +134,5 @@ const authSlice = createSlice({
     }
 })
 
+export const { setToken } = authSlice.actions;
 export default authSlice.reducer;

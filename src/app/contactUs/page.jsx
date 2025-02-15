@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import { Mail, Phone, Send, MapPin } from "lucide-react";
-
+import ProtectedRoute from "@/components/ProtectedRoute";
 const ContactPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeInput, setActiveInput] = useState(null);
@@ -33,6 +33,7 @@ const ContactPage = () => {
   ];
 
   return (
+    <ProtectedRoute>
     <div className="min-h-screen relative flex flex-col overflow-hidden bg-gradient-to-b from-blue-50 to-white">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -156,7 +157,8 @@ const ContactPage = () => {
           transform: translateY(0);
         }
       `}</style>
-    </div>
+      </div>
+      </ProtectedRoute>
   );
 };
 

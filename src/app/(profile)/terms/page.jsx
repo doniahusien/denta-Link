@@ -1,6 +1,8 @@
+"use client";
+
 import ContentBox from '@/components/UI/profile/ContentBox';
 import TermsCard from '@/components/profile/TermsCard';
-
+import ProtectedRoute from '@/components/ProtectedRoute';
 const dummyTermsData = [
   {
     title: "1. Introduction",
@@ -24,6 +26,7 @@ const dummyTermsData = [
 
 export default function ProfilePage() {
   return (
+    <ProtectedRoute>
     <ContentBox title="Terms & Conditions">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {dummyTermsData.map((item, index) => (
@@ -35,5 +38,6 @@ export default function ProfilePage() {
         ))}
       </div>
     </ContentBox>
+    </ProtectedRoute>
   );
 }

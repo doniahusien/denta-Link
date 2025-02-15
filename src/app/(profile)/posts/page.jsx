@@ -1,4 +1,5 @@
-// app/(profile)/profile/page.jsx
+"use client";
+
 import ContentBox from '@/components/UI/profile/ContentBox';
 import IconCard from '@/components/UI/profile/IconCard';
 import ProtectedRoute from '@/components/ProtectedRoute'
@@ -23,7 +24,7 @@ export default function ProfilePage() {
   ];
 
   return (
-    
+    <ProtectedRoute>
     <ContentBox title="My Posts">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
@@ -35,6 +36,7 @@ export default function ProfilePage() {
           />
         ))}
       </div>
-    </ContentBox>
+      </ContentBox>
+      </ProtectedRoute>
   );
 }

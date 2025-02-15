@@ -1,22 +1,30 @@
-// src/components/ProtectedRoute.js
 'use client';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { setToken } from '@/redux/features/auth/authSlice';
 
 const ProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
-    if (!token) {
-      router.push('/login'); 
+    const storedToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (storedToken) {
+      dispatch(setToken(storedToken));
     }
-  }, [token, router]);
+    setIsLoading(false); 
+  }, [dispatch]);
 
-  if (!token) {
-    return null; 
-  }
+  useEffect(() => {
+    if (!isLoading && !token) {
+      router.push('/login');
+    }
+  }, [token, router, isLoading]);
+
+  if (isLoading || !token) return null; 
 
   return <>{children}</>;
 };

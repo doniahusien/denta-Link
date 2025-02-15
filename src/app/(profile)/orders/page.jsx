@@ -1,9 +1,8 @@
-// app/(profile)/profile/page.jsx
 'use client';
 import { useState, useEffect } from 'react';
 import ContentBox from '@/components/UI/profile/ContentBox';
 import OrderCard from '@/components/profile/OrderCard';
-
+import ProtectedRoute from '@/components/ProtectedRoute';
 export default function ProfilePage() {
   const [orders, setOrders] = useState([]);
 
@@ -38,6 +37,7 @@ export default function ProfilePage() {
   }, []);
 
   return (
+    <ProtectedRoute>
     <ContentBox title="All Orders">
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {orders.map((order) => (
@@ -50,6 +50,7 @@ export default function ProfilePage() {
           />
         ))}
       </div>
-    </ContentBox>
+      </ContentBox>
+    </ProtectedRoute>
   );
 }
