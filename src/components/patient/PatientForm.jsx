@@ -34,6 +34,7 @@ const PatientForm = () => {
                 phone: '',
                 category: '',
                 description: '',
+                location: '',
                 file: null,
             });
             setTimeout(() => setShowSuccessMessage(false), 3000);
@@ -117,6 +118,10 @@ const PatientForm = () => {
                             <option value="Prosthodontics">Prosthodontics</option>
                             <option value="Diagnostics">Diagnostics</option>
                         </select>
+                    </div>
+                    <div>
+                        <Label text="Location" />
+                        <Input type="text" name="location" value={formData.location} onChange={handleChange} />
                     </div>
                     <div>
                         <Label text="Description" />

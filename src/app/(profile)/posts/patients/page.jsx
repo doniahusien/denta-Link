@@ -5,12 +5,11 @@ import ContentBox from '@/components/UI/profile/ContentBox';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Card from '@/components/profile/ToolCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPatientCases } from '@/redux/features/patient/patientThunk';
+import { fetchPatientCases } from '@/redux/features/profile/profileThunk';
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  const { mypatients, loading } = useSelector(state => state.patient);
-
+  const { mypatients, loading } = useSelector(state => state.profile);
   useEffect(() => {
     dispatch(fetchPatientCases());
   }, [dispatch]);
