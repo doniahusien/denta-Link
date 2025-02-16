@@ -13,7 +13,7 @@ const PatientCard = ({ id, image, name, location, title }) => {
         <div className=" bg-white border border-gray-200 rounded-lg  transition-transform duration-300 ease-in-out hover:scale-105 hover:brightness-125 hover:border-blue-500 shadow-md px-4 py-3 w-full sm:w-[40%] md:w-[35%] lg:w-[17%]">
             <div className="relative w-full h-40">
                 <Image
-                    src={image}
+                    src={image||"/images/patient/patient.svg"}
                     alt={name}
                     fill
                     className="object-cover rounded-t-lg"
