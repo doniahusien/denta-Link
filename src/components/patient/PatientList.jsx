@@ -25,10 +25,10 @@ const PatientList = () => {
                     patients.map((patient, index) => (
                         <PatientCard
                             key={index}
-                            image={patient.file}
+                            image={patient.file||"/images/patient/patient.svg"}
                             name={patient.name}
                             id={patient._id}
-                            location={patient.category} 
+                            location={patient.location} 
                             title={patient.title}
                             fav={patient.isFav}
                         />
