@@ -14,7 +14,7 @@ export default function ProfilePage() {
           <Card
             title="Tool Name"
             imageSrc="/images/Profile/mirror.svg"
-            fields={[
+            additionalFields={[
               { label: "Name", name: "name", value: "Dental Drill" },
               { label: "Price", name: "price", value: "$120" },
               { label: "Category", name: "category", value: "Endodontics" },

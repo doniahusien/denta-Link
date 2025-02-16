@@ -29,7 +29,7 @@ const Card = ({
         <div className="relative w-32 h-24">
           <Image
             src={imageSrc}
-            alt={name}
+            alt={name||"img"}
             layout="fill"
             objectFit="contain"
             className="rounded-lg"

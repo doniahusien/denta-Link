@@ -26,25 +26,25 @@ export default function ProfilePage() {
       <ContentBox title="Patients">
         <div className="flex flex-col ">
           {mypatients.length > 0 ? (mypatients.map((patient) => (
-           <Card
-           key={patient._id}
-           name={patient.name}
-           imageSrc={patient.file}
-           additionalFields={[
-             { label: "Name", value: patient.name },
-             { label: "Age", value: patient.age },
-             { label: "Title", value: patient.title },
-             { label: "Gender", value: patient.gender },
-             { label: "Phone Number", value: patient.phone },
-             { label: "Category", value: patient.category },
-             { label: "Description", value: patient.description }
-           ]}
-           description={patient.description}
-           onEdit={(updatedData) => console.log("Updated Patient:", updatedData)}
-         />
-         
+            <Card
+              key={patient._id}
+              name={patient.name}
+              imageSrc={patient.file}
+              additionalFields={[
+                { label: "Name", value: patient.name },
+                { label: "Age", value: patient.age },
+                { label: "Title", value: patient.title },
+                { label: "Gender", value: patient.gender },
+                { label: "Phone Number", value: patient.phone },
+                { label: "Category", value: patient.category },
+                { label: "Description", value: patient.description }
+              ]}
+              description={patient.description}
+              onEdit={(updatedData) => console.log("Updated Patient:", updatedData)}
+            />
+
           ))) : (<>
-              <p>Not found</p>
+            <p>Not found</p>
           </>)}
         </div>
       </ContentBox>
