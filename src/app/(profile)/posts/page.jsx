@@ -2,26 +2,9 @@
 
 import ContentBox from '@/components/UI/profile/ContentBox';
 import IconCard from '@/components/UI/profile/IconCard';
-import ProtectedRoute from '@/components/ProtectedRoute'
+import ProtectedRoute from '@/components/ProtectedRoute';
+import { cards } from '../../../../public/data/cardsData';
 export default function ProfilePage() {
-  const cards = [
-    {
-      icon: '/images/Profile/tools.svg',
-      title: 'Tools',
-      href: '/posts/tools'
-    },
-    {
-      icon: '/images/Profile/Patients.svg',
-      title: 'Patients',
-      href: '/posts/patients'
-    }
-    ,
-    {
-      icon: '/images/Profile/exchange.svg',
-      title: 'Exchange',
-      href: '/posts/exchange'
-    }
-  ];
 
   return (
     <ProtectedRoute>
