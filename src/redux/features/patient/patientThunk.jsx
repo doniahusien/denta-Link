@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllPatients = createAsyncThunk(
     "patient/fetchAllPatients",
-    async (_, { rejectWithValue ,getState}) => {
+    async (_, { rejectWithValue, getState }) => {
         try {
             const state = getState();
             const token = state.auth.token;
@@ -52,13 +52,18 @@ export const addPatient = createAsyncThunk(
     }
 );
 
-
-
 export const fetchPatientsByTitle = createAsyncThunk(
     "patient/fetchPatientsByTitle",
     async (title, { rejectWithValue }) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/patient/search?title=${title}`);
+            const state = getState();
+            const token = state.auth.token;
+            const response = await fetch(`http://localhost:3000/api/patient/search?title=${title}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Failed to fetch patients by title");
@@ -71,10 +76,9 @@ export const fetchPatientsByTitle = createAsyncThunk(
     }
 );
 
-
 export const fetchPatientById = createAsyncThunk(
     "patient/fetchPatientById",
-    async (id, { rejectWithValue,getState }) => {
+    async (id, { rejectWithValue, getState }) => {
         try {
             const state = getState();
             const token = state.auth.token;
