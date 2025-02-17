@@ -34,7 +34,7 @@ export default function ProfileSidebar() {
         </div>
 
         <Link 
-          href="/profile/edit" 
+          href="/edit" 
           className="absolute top-4 right-4"
         >
           <Image 

@@ -12,18 +12,17 @@ export default function ProfilePage() {
 
 
           <Card
-            title="Tool Name"
+            type="tool"
+            name="Dental Drill"
             imageSrc="/images/Profile/mirror.svg"
             additionalFields={[
-              { label: "Name", name: "name", value: "Dental Drill" },
               { label: "Price", name: "price", value: "$120" },
               { label: "Category", name: "category", value: "Endodontics" },
-              { label: "Description", name: "description", value: "Used for orthodontic treatments." }
+              {label:"Description", name:"description",value: "Used for orthodontic treatments."}
             ]}
+           
             onEdit={(updatedData) => console.log("Updated Tool:", updatedData)}
           />
-
-
         </div>
       </ContentBox>
     </ProtectedRoute>

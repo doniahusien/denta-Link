@@ -8,7 +8,7 @@ const CaseDetails = ({ patient }) => {
 
     const generatePDF = async () => {
         const doc = new jsPDF();
-        const images = patient.file || [];
+        const images = patient.images || [];
 
         if (images.length === 0) {
             alert("No images available for PDF generation.");
@@ -82,11 +82,11 @@ const CaseDetails = ({ patient }) => {
             </div>
 
             {/* Image Gallery */}
-            {patient.file?.length > 0 && (
+            {patient.images?.length > 0 && (
                 <div className="p-8 bg-white rounded-lg space-y-3">
                     <h3 className="text-4xl font-semibold border-b pb-3">Images</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {patient.file.map((image, index) => (
+                        {patient.images.map((image, index) => (
                             <div key={index} className="relative w-full h-40">
                                 <img
                                     src={image}

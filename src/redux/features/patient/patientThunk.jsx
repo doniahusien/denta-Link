@@ -6,7 +6,7 @@ export const fetchAllPatients = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch("http://localhost:3000/api/patient", {
+            const response = await fetch("https://backend-production-2daf.up.railway.app/api/patients", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -14,7 +14,9 @@ export const fetchAllPatients = createAsyncThunk(
             });
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || "Failed to fetch patients");
+                //throw new Error(errorData.message || "Failed to fetch patients");
+                console.log(errorData.message);
+                
             }
             const data = await response.json();
             return data;
@@ -31,7 +33,7 @@ export const addPatient = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("http://localhost:3000/api/patient/add", {
+            const response = await fetch("https://backend-production-2daf.up.railway.app/api/patients/add", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -58,7 +60,7 @@ export const fetchPatientsByTitle = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`http://localhost:3000/api/patient/search?title=${title}`, {
+            const response = await fetch(`https://backend-production-2daf.up.railway.app/api/patients/search?title=${title}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -82,7 +84,7 @@ export const fetchPatientById = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`http://localhost:3000/api/patient/${id}`, {
+            const response = await fetch(`https://backend-production-2daf.up.railway.app/api/patients/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -108,7 +110,7 @@ export const toggleFavorite = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("http://localhost:3000/api/patient/toggle", {
+            const response = await fetch("https://backend-production-2daf.up.railway.app/api/patients/toggle", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
