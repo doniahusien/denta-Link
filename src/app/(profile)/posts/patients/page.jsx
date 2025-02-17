@@ -24,7 +24,24 @@ export default function ProfilePage() {
     <ProtectedRoute>
       <ContentBox title="Patients">
         <div className="flex flex-col ">
-          {mypatients.length > 0 ? (mypatients.map((patient) => (
+          <Card
+            type="patient"
+            name="John Doe"
+            imageSrc="/images/patient/patient.svg"
+            additionalFields={[
+              { label: "Age", name: "age", value: "25" },
+              { label: "Title", value: "Econi" },
+              { label: "Gender", name: "gender", value: "Male" },
+              { label: "Phone Number", name: "phone", value: "+123456789" },
+              { label: "Category",name: "category", value: "gyii" },
+              { label: "Location", name: "location",value: "Mansoura" },
+              { label: "Description",name: "description", value: "jfesdvxc efsdvbjkxn ihj" }
+            ]}
+            patientId="123"
+            onEdit={(updatedData) => console.log("Updated Patient:", updatedData)}
+          />
+
+          {/*mypatients.length > 0 ? (mypatients.map((patient) => (
             <Card
               key={patient._id}
               name={patient.name}
@@ -44,7 +61,7 @@ export default function ProfilePage() {
 
           ))) : (<>
             <p>Not found</p>
-          </>)}
+          </>)*/}
         </div>
       </ContentBox>
     </ProtectedRoute>
