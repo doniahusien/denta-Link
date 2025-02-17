@@ -25,7 +25,7 @@ const PatientList = () => {
                     patients.map((patient, index) => (
                         <PatientCard
                             key={index}
-                            image={ patient.file}
+                            image={patient.images}
                             name={patient.name}
                             id={patient._id}
                             location={patient.location} 

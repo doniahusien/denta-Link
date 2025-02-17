@@ -33,7 +33,7 @@ const PatientDetails = () => {
 
         {/* Patient Details (Row 1) */}
         <div className="flex flex-col lg:flex-row gap-10 p-8 bg-white shadow-lg rounded-lg">
-          <DetailImage image={patient.file[0]} alt={patient.name} fav={patient.isFav} patientId={id} />
+          <DetailImage image={patient.images} alt={patient.name} fav={patient.isFav} patientId={id} />
           <DetailInfo
             patientname={patient.name}
             publisher={patient.createdBy.name}
