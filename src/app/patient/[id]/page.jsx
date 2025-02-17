@@ -20,7 +20,7 @@ const PatientDetails = () => {
       console.error('Patient ID is undefined');
     }
   }, [dispatch, id]);
-  
+
 
   if (loading) return <p>Loading patient details...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -28,25 +28,25 @@ const PatientDetails = () => {
 
   return (
     <ProtectedRoute>
-    <div className="max-w-5xl mx-auto py-40 space-y-5">
-      <h2 className="text-3xl font-semibold border-b pb-2">Patient details</h2>
+      <div className="max-w-5xl mx-auto py-40 space-y-5">
+        <h2 className="text-3xl font-semibold border-b pb-2">Patient details</h2>
 
-      {/* Patient Details (Row 1) */}
-      <div className="flex flex-col lg:flex-row gap-10 p-8 bg-white shadow-lg rounded-lg">
-        <DetailImage image={patient.file} alt={patient.name} fav={patient.isFav} patientId={id} />
-        <DetailInfo
-          patientname={patient.name}
-          publisher={patient.createdBy.name}
-          age={patient.age}
-          location={patient.title}
-          gender={patient.gender}
-        />
-      </div>
+        {/* Patient Details (Row 1) */}
+        <div className="flex flex-col lg:flex-row gap-10 p-8 bg-white shadow-lg rounded-lg">
+          <DetailImage image={patient.file[0]} alt={patient.name} fav={patient.isFav} patientId={id} />
+          <DetailInfo
+            patientname={patient.name}
+            publisher={patient.createdBy.name}
+            age={patient.age}
+            location={patient.title}
+            gender={patient.gender}
+          />
+        </div>
 
-      {/* Case Details (Row 2) */}
-      <CaseDetails patient={patient} />
+        {/* Case Details (Row 2) */}
+        <CaseDetails patient={patient} />
       </div>
-      </ProtectedRoute>
+    </ProtectedRoute>
   );
 };
 
