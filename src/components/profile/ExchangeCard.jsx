@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import EditForm from "./EditForm"; // Assuming you have this component
+import EditForm from "./EditForm";
 import Fav from "../UI/Fav";
 import { Phone } from "lucide-react";
 
@@ -26,16 +26,16 @@ const ExchangeCard = ({ isFavorite, publisher, name, exchangeWith, notes, contac
 
     return (
         <div className="mb-6 w-full px-5 ">
-            <div className="relative flex flex-col md:flex-row items-center gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white w-[500px]">
-                <div className=" rounded-lg p-5 w-full sm:w-96 relative">
+            <div className="relative flex flex-col md:flex-row items-center gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white ">
+                <div className=" rounded-lg p-5 md:w-[500px] sm:w-96 relative">
                     <div className="flex flex-col gap-2 sm:flex-col md:flex-row justify-between items-center mb-4">
                         <div>
                             <Image
                                 src={imageSrc || "/images/default-tool.svg"}
                                 alt="Tooth icon"
-                                width={80}
-                                height={80}
-                                className="w-20 h-20"
+                                width={100}
+                                height={100}
+                                className="w-28 h-28"
                             />
                         </div>
                         <div className="text-sm space-y-1">
@@ -53,7 +53,7 @@ const ExchangeCard = ({ isFavorite, publisher, name, exchangeWith, notes, contac
 
                         {/* Edit Icon */}
                         {onEdit && (
-                            <button onClick={toggleForm} className="absolute top-3 right-3">
+                            <button onClick={toggleForm} className="absolute top-8 right-2">
                                 <Image
                                     src="/images/icons/profile/edit.svg"
                                     alt="Edit"
