@@ -1,23 +1,4 @@
-// import React from "react";
-// import "./loader.css";
-
-// const Loader = () => {
-//   return (
-//     <div className="fixed inset-0 bg-white flex items-center justify-center z-50">
-//       <div className="tooth">
-//         <div className="tooth-root"></div>
-//         <div className="brush">
-//           <div className="brush-handle"></div>
-//           <div className="brush-head"></div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Loader;
-
-"use client"; // Ensures it runs only on the client side
+"use client";
 
 import React, { useEffect } from "react";
 
