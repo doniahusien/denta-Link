@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ShoppingCart, Edit } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useSelector } from "react-redux";
-import profile from "../../../public/images/icons/profile.svg";
 import Button from "../UI/Button/Button";
+import DropDown from "../UI/DropDown";
+
+
+import { menuItems } from "../profile/ProfileSidebar";
 
 const UserActions = ({ isMobile = false }) => {
     const { token } = useSelector((state) => state.auth);
@@ -18,14 +20,7 @@ const UserActions = ({ isMobile = false }) => {
                         <ShoppingCart className="w-6 h-6 mr-1" />
                         <p>My Cart</p>
                     </Link>
-                    <div className="relative w-12 h-12">
-                        <Image src={profile} alt="Profile Picture" className="rounded-full" />
-                        <Link href="/edit-profile">
-                            <div className="absolute bottom-0 right-0 p-1 text-blue-500 bg-white rounded-full">
-                                <Edit className="w-4 h-4" />
-                            </div>
-                        </Link>
-                    </div>
+                    <DropDown links={menuItems} />
                 </>
             ) : (
                 <>
