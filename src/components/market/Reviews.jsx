@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 
 const Reviews = ({ reviews }) => {
     return (
@@ -7,9 +8,12 @@ const Reviews = ({ reviews }) => {
             <div className="pt-10">
                 <div className="flex justify-between items-center mb-2">
                     <h3 className="text-xl font-semibold">Reviews ({reviews.length})</h3>
-                    <span className="text-gray-500 text-sm hover:underline cursor-pointer">
-                        View all
-                    </span>
+                    <Link href="/market/reviews">
+                        <span className="text-gray-500 text-sm hover:underline cursor-pointer">
+                            View all
+                        </span>
+                    </Link>
+
                 </div>
                 {reviews.slice(0, 1).map((review, index) => (
                     <div key={index} className="space-y-4">
