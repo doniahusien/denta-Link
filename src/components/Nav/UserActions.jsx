@@ -20,7 +20,7 @@ const UserActions = ({ isMobile = false }) => {
                     </Link>
                     <div className="relative w-12 h-12">
                         <Image src={profile} alt="Profile Picture" className="rounded-full" />
-                        <Link href="/edit-profile">
+                        <Link href="/edit">
                             <div className="absolute bottom-0 right-0 p-1 text-blue-500 bg-white rounded-full">
                                 <Edit className="w-4 h-4" />
                             </div>
