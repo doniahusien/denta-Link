@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from "next/link";
 
 export default function ServicesSection() {
   return (
@@ -12,25 +13,26 @@ export default function ServicesSection() {
           {/* Service Cards */}
           <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-12">
             {[
-              { title: "Patients", icon: "/images/Home/Patients.svg" },
-              { title: "Exchange", icon: "/images/Home/Exchange.svg" },
-              { title: "Buy Tools", icon: "/images/Home/buyTools.svg" },
+              { title: "Patients", icon: "/images/Home/Patients.svg",href:"/patient" },
+              { title: "Exchange", icon: "/images/Home/Exchange.svg",href:"/market/exchange" },
+              { title: "Buy Tools", icon: "/images/Home/buyTools.svg",href:"/market/shop" },
             ].map((service, index) => (
-              <div
-                key={index}
-                className="w-full md:w-[250px] h-[200px] md:h-[250px] bg-[#F0F6FF] border-[0.2px] border-white rounded-[16px] flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <Image
-                  src={service.icon}
-                  alt={service.title}
-                  width={80}
-                  height={80}
-                  className="mb-4 md:mb-6"
-                />
-                <h3 className="font-cairo text-[24px] md:text-[32px] leading-[40px] md:leading-[60px] font-medium">
-                  {service.title}
-                </h3>
-              </div>
+              < Link href={service.href}  key={index}>
+                <div
+                  className="w-full md:w-[250px] h-[200px] md:h-[250px] bg-[#F0F6FF] border-[0.2px] border-white rounded-[16px] flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+                >
+                  <Image
+                    src={service.icon}
+                    alt={service.title}
+                    width={80}
+                    height={80}
+                    className="mb-4 md:mb-6"
+                  />
+                  <h3 className="font-cairo text-[24px] md:text-[32px] leading-[40px] md:leading-[60px] font-medium">
+                    {service.title}
+                  </h3>
+                </div>
+              </Link>
             ))}
           </div>
 
