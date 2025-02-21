@@ -26,19 +26,21 @@ export default function FavPage() {
         <ProtectedRoute>
             <ContentBox title="Favorite Patients">
                 <div className="flex flex-col">
-                    {favouritePatients.length > 0 ? (
+                    {Array.isArray(favouritePatients) && favouritePatients.length > 0 ? (
                         favouritePatients.map((patient) => (
                             <Card
+                                type="Patient"
                                 key={patient._id}
                                 patientId={patient._id}
                                 name={patient.name}
-                                imageSrc={patient.file || "/images/patient.svg"}
+                                imageSrc={patient.images?.[0] || "/default-image.png"}
                                 additionalFields={[
                                     { label: "Age", value: patient.age },
                                     { label: "Title", value: patient.title },
                                     { label: "Gender", value: patient.gender },
                                     { label: "Phone number", value: patient.phone },
-                                    { label: "Category", value: patient.category }
+                                    { label: "Category", value: patient.category },
+                                    { label: "Location", value: patient.location },
                                 ]}
                                 description={patient.description}
                                 isFavorite={true}
@@ -47,6 +49,7 @@ export default function FavPage() {
                     ) : (
                         <p className="text-gray-500">No favorite patients found.</p>
                     )}
+
                 </div>
             </ContentBox>
         </ProtectedRoute>

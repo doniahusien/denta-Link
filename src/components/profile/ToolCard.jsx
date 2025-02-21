@@ -40,7 +40,7 @@ const Card = ({
         {/* Image Section */}
         <div className="relative w-28 h-28 md:w-32 md:h-32 flex-shrink-0">
           <Image
-            src={imageSrc || (type === "tool" ? "/images/default-tool.svg" : "/images/default-patient.svg")}
+            src={imageSrc}
             alt={name || "img"}
             layout="fill"
             objectFit="cover"
