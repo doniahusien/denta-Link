@@ -86,3 +86,30 @@ export const updatePatient = createAsyncThunk(
         }
     }
 );
+
+export const fetchExchangeFav = createAsyncThunk(
+    "profile/fetchExchangeFav",
+    async (_, { rejectWithValue, getState }) => {
+        try {
+            const state = getState();
+            const token = state.auth.token;
+            const response = await fetch("http://localhost:3000/api/exchanges/favorites", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("API Error:", errorData);
+                throw new Error(errorData.message || "Failed to fetch patient favourits");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Fetch Error:", error.message);
+            return rejectWithValue(error.message);
+        }
+    }
+);
