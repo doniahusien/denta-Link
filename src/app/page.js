@@ -32,11 +32,11 @@ export default function Home() {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
 
-  // Mock data for LatestCases (replace with API data later)
   const cases1 = [
     {
-      doctor: "Dr. Mahmoud",
+      doctor: "Dr. Ahmed Abdelfatah",
       location: "Mansoura",
       title: "Cavities",
       image: "/images/Home/doctor.svg"

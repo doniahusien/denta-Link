@@ -38,7 +38,7 @@ export default function FavPage() {
     return (
         <ProtectedRoute>
             <ContentBox title="Favorite Exchange">
-                <div className="flex flex-col pt-5 gap-5">
+                <div className="flex flex-row flex-wrap pt-5 gap-5">
                     {exchanges.map((exchange, index) => (
                         <ExchangeCard
                             key={index}

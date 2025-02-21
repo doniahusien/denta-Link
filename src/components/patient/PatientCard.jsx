@@ -14,7 +14,6 @@ const PatientCard = ({ id, image, name, location, title }) => {
             <div className="relative w-full h-40">
                 <Image
                     src={image[0]}
-                   
                     alt={name}
                     fill
                     className="object-cover rounded-t-lg"

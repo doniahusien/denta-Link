@@ -12,7 +12,6 @@ const patientPage = () => {
         <div className="relative pb-5">
           <HeaderSection imgURL="/images/patient/patientHeader.svg" textDir="left" title="patient " subtitle="Let’s Find Appropriate" />
           <SearchInput href="/patient/add-patient" title="Add Patient" placeholder="search patient" />
-
         </div>
         <div className='pt-10'>
           <PatientList />

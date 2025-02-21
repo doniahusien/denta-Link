@@ -56,7 +56,7 @@ export const addPatient = createAsyncThunk(
 
 export const fetchPatientsByTitle = createAsyncThunk(
     "patient/fetchPatientsByTitle",
-    async (title, { rejectWithValue }) => {
+    async (title, { rejectWithValue ,getState}) => {
         try {
             const state = getState();
             const token = state.auth.token;

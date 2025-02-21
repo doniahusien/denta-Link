@@ -34,7 +34,7 @@ const ContactPage = () => {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen relative flex flex-col overflow-hidden bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen relative flex flex-col overflow-hidden bg-gradient-to-b from-blue-50 to-white pt-24">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-br from-blue-100/50 via-blue-50/30 to-transparent" />
