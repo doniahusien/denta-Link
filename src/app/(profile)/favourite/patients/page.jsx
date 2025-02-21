@@ -9,15 +9,11 @@ import { fetchPatientFav } from "@/redux/features/profile/profileThunk";
 
 export default function FavPage() {
     const dispatch = useDispatch();
-    const { loading, favouritePatients, error } = useSelector((state) => state.profile); // ✅ FIXED useSelector
+    const { loading, favouritePatients, error } = useSelector((state) => state.profile);
 
     useEffect(() => {
         dispatch(fetchPatientFav());
     }, [dispatch]);
-
-    useEffect(() => {
-        console.log("Redux State (favouritePatients):", favouritePatients);
-    }, [favouritePatients]);
 
     if (loading) return <p className="text-gray-500">Loading...</p>;
     if (error) return <p className="text-red-500">{error}</p>;
