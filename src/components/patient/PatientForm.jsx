@@ -1,41 +1,44 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import Label from '../auth/Label';
-import SubmitBtn from '../auth/SubmitBtn';
-import FileInput from '../UI/FileInput';
-import Input from '../auth/Input';
-import { addPatient } from '@/redux/features/patient/patientThunk';
-import { useDispatch, useSelector } from 'react-redux';
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Label from "../auth/Label";
+import SubmitBtn from "../auth/SubmitBtn";
+import fileSrc from "../../../public/images/icons/file.svg";
+import fileId from "../../../public/images/icons/fileId.svg";
+import Input from "../auth/Input";
+import { addPatient } from "@/redux/features/patient/patientThunk";
+import { useDispatch, useSelector } from "react-redux";
 
 const PatientForm = () => {
     const dispatch = useDispatch();
-    const { error, success, loading } = useSelector(state => state.patient);
+    const { error, success, loading } = useSelector((state) => state.patient);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const [formData, setFormData] = useState({
-        name: '',
-        title: '',
-        age: '',
-        gender: '',
-        phone: '',
-        category: '',
-        description: '',
-        file: null,
+        name: "",
+        title: "",
+        age: "",
+        gender: "",
+        phone: "",
+        category: "",
+        description: "",
+        location: "",
+        images: [],
     });
 
     useEffect(() => {
         if (success) {
             setShowSuccessMessage(true);
             setFormData({
-                name: '',
-                title: '',
-                age: '',
-                gender: '',
-                phone: '',
-                category: '',
-                description: '',
-                location: '',
-                file: null,
+                name: "",
+                title: "",
+                age: "",
+                gender: "",
+                phone: "",
+                category: "",
+                description: "",
+                location: "",
+                images: [],
             });
             setTimeout(() => setShowSuccessMessage(false), 3000);
         }
@@ -44,8 +47,14 @@ const PatientForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const patientData = new FormData();
-        Object.keys(formData).forEach(key => {
-            patientData.append(key, formData[key]);
+        Object.keys(formData).forEach((key) => {
+            if (key === "images") {
+                formData.images.forEach((image) => {
+                    patientData.append("images", image);
+                });
+            } else {
+                patientData.append(key, formData[key]);
+            }
         });
 
         dispatch(addPatient(patientData));
@@ -57,7 +66,8 @@ const PatientForm = () => {
     };
 
     const handleFileChange = (e) => {
-        setFormData({ ...formData, file: e.target.files[0] });
+        const files = Array.from(e.target.files);
+        setFormData({ ...formData, images: [...formData.images, ...files] });
     };
 
     return (
@@ -113,7 +123,9 @@ const PatientForm = () => {
                             name="category"
                             onChange={handleChange}
                         >
-                            <option value="" disabled>Select a category</option>
+                            <option value="" disabled>
+                                Select a category
+                            </option>
                             <option value="Endodontics">Endodontics</option>
                             <option value="Prosthodontics">Prosthodontics</option>
                             <option value="Diagnostics">Diagnostics</option>
@@ -134,7 +146,46 @@ const PatientForm = () => {
                             className="w-full h-32 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         ></textarea>
                     </div>
-                    <FileInput handleFileChange={handleFileChange} label="Upload Files" flag="true" />
+
+                    {/* Multiple Image Upload */}
+                    <div>
+                        <label className="block text-gray-700 mb-2 flex items-center space-x-2">
+                            <Image src={fileId} alt="file icon" width={25} height={25} />
+                            <span>Upload Images</span>
+                        </label>
+                        <div className="flex flex-col gap-2 items-center justify-between border border-gray-300 rounded-lg px-4 py-3 bg-[#EFFFF7] space-y-3 md:space-y-0">
+                            <div className="flex items-center space-x-2">
+                                <Image src={fileSrc} alt="file" width={23} height={23} />
+                                <p className="text-xs sm:text-sm text-gray-600">Only .jpg and .png files</p>
+                            </div>
+                            <label className="bg-[#34FF9D] text-black text-sm py-1 px-5 rounded-md cursor-pointer hover:bg-green-500 transition duration-200">
+                                Choose Files
+                                <input
+                                    type="file"
+                                    name="images"
+                                    accept=".jpg,.png"
+                                    multiple
+                                    className="hidden"
+                                    onChange={handleFileChange}
+                                />
+                            </label>
+                        </div>
+                        {/* Display Selected Images */}
+                        {formData.images.length > 0 && (
+                            <div className="mt-2 grid grid-cols-3 gap-2">
+                                {formData.images.map((file, index) => (
+                                    <div key={index} className="relative">
+                                        <img
+                                            src={URL.createObjectURL(file)}
+                                            alt={`selected-${index}`}
+                                            className="w-16 h-16 object-cover rounded-md"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
                     {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                     {showSuccessMessage && <p className="text-green-500 text-sm mt-2">Patient added successfully!</p>}
                     <div className="text-center">
