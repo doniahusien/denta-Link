@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllExchanges, toggleFavorite,fetchExchangeByName } from "./exchangeThunk";
+import { fetchAllExchanges, toggleFavorite, fetchExchangeByName, addExchange } from "./exchangeThunk";
 const initialState = {
     exchangeTools: [],
     loading: false,
@@ -47,6 +47,19 @@ const exchangeSlice = createSlice({
                 state.loading = false;
             })
             .addCase(fetchExchangeByName.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            }).addCase(addExchange.pending, (state) => {
+                state.error = null;
+                state.loading = true;
+                state.success = false;
+            })
+            .addCase(addExchange.fulfilled, (state) => {
+                state.error = null;
+                state.loading = false;
+                state.success = true;
+            })
+            .addCase(addExchange.rejected, (state, action) => {
                 state.error = action.payload;
                 state.loading = false;
             })

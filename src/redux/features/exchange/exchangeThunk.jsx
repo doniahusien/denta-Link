@@ -78,3 +78,31 @@ export const fetchExchangeByName = createAsyncThunk(
         }
     }
 );
+
+export const addExchange = createAsyncThunk(
+    "exchange/addExchange",
+    async (exchangeData, { rejectWithValue, getState }) => {
+        try {
+            const state = getState();
+            const token = state.auth.token;
+
+            const response = await fetch("http://localhost:3000/api/exchanges/add", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: exchangeData,
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Failed to add patient");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
