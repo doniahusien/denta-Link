@@ -2,22 +2,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Heart } from 'lucide-react';
-import { toggleFavorite } from '@/redux/features/patient/patientThunk';
+import { toggleFavorite as togglePatientFavorite } from "@/redux/features/patient/patientThunk";
+import { toggleFavorite as toggleExchangeFavorite } from "@/redux/features/exchange/exchangeThunk";
 
-const Fav = ({ fav, patientId }) => {
+
+const Fav = ({ fav, patientId, exchangeId }) => {
     const dispatch = useDispatch();
     const [liked, setLiked] = useState(fav);
     const [isUpdating, setIsUpdating] = useState(false);
 
     const toggleLike = async () => {
-        setLiked((prev) => !prev); 
+        setLiked((prev) => !prev);
         setIsUpdating(true);
 
         try {
-            await dispatch(toggleFavorite(patientId)).unwrap();
+            if (patientId) {
+                await dispatch(togglePatientFavorite(patientId)).unwrap();
+            } else if (exchangeId) {
+                console.log("Toggling favorite for exchangeId:", exchangeId);
+
+                await dispatch(toggleExchangeFavorite(exchangeId)).unwrap();
+            }
         } catch (error) {
             console.error("Failed to toggle favorite:", error);
-            setLiked((prev) => !prev); 
+            setLiked((prev) => !prev);
         } finally {
             setIsUpdating(false);
         }

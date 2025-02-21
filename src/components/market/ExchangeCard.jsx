@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import { Heart, Phone } from 'lucide-react';
+import {Phone } from 'lucide-react';
 import Fav from '../UI/Fav';
 import img from '../../../public/images/market/tooth.svg'
-const ExchangeCard = ({ publisher, name, exchangeWith, notes, contact, date, imageSrc }) => {
+const ExchangeCard = ({ publisher, toothName, exchangeWith, notes, contact, createdAt, imageSrc ,isFavExchange,id}) => {
     return (
         <div className="bg-white rounded-lg shadow-md p-5 w-full sm:w-96 relative">
             <div className="flex flex-col gap-2 sm:flex-col md:flex-row justify-between items-start mb-4">
@@ -12,17 +12,17 @@ const ExchangeCard = ({ publisher, name, exchangeWith, notes, contact, date, ima
                 </div>
                 <div className="text-sm space-y-1">
                     <p>
-                        <span className="font-semibold">Publisher:</span> {publisher}
+                        <span className="font-semibold">Publisher:</span> {publisher.name}
                     </p>
                     <p>
-                        <span className="font-semibold">Name:</span> {name}
+                        <span className="font-semibold">Name:</span> {toothName}
                     </p>
                     <p>
                         <span className="font-semibold">Exchange with:</span> {exchangeWith}
                     </p>
                 </div>
                 <div>
-                    <Fav />
+                    <Fav fav={isFavExchange} exchangeId={id} />
                 </div>
             </div>
 
@@ -41,7 +41,7 @@ const ExchangeCard = ({ publisher, name, exchangeWith, notes, contact, date, ima
                         <Phone className="inline w-4 h-4 mr-1" />
                         <span className='text-black'>{contact}</span>
                     </p>
-                    <p className="text-gray-400 text-xs">{date}</p>
+                    <p className="text-gray-400 text-xs">{createdAt}</p>
                 </div>
             </div>
         </div>

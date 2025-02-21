@@ -1,106 +1,24 @@
 import React from 'react';
+import { useEffect } from 'react';
 import ExchangeCard from './ExchangeCard';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllExchanges } from '@/redux/features/exchange/exchangeThunk';
 const ExchangeToolList = () => {
-    const exchangeTools = [
-        {
-            id: 1,
-            publisher: 'Dr Mahmoud',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 27,
-            publisher: 'Dr Mahmoud',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 35,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 33,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 30,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 4,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 5,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 6,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 7,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-        {
-            id: 8,
-            publisher: 'Dr Ahmed',
-            name: 'Canines',
-            exchangeWith: 'Second Molar',
-            notes: 'The tooth has a cavity.',
-            contact: '9565421515',
-            date: '12/10/2025',
-        },
-    ];
+    const dispatch = useDispatch();
+    const { loading, exchangeTools, searchTool } = useSelector(state => state.exchange);
 
+    useEffect(() => {
+        if (!searchTool) {
+            dispatch(fetchAllExchanges());
+        }
+    }, [dispatch, searchTool]);
+    if (loading) return (<p>loading</p>)
     return (
         <div className="min-h-screen px-5 py-10">
             <h1 className="text-4xl my-12 sm:pl-10 md:pl-20">Tools</h1>
             <div className="flex flex-wrap justify-center gap-6">
                 {exchangeTools.map((tool) => (
-                    <ExchangeCard key={tool.id} {...tool} />
+                    <ExchangeCard key={tool._id} id={tool._id} imageSrc={tool.images[0]} {...tool} />
                 ))}
             </div>
         </div>

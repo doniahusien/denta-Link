@@ -81,7 +81,6 @@ const patientSlice = createSlice({
                 state.loading = false;
                 state.success = "Done";
                 console.log(state.success);
-
             })
             .addCase(toggleFavorite.rejected, (state, action) => {
                 state.error = action.payload.message;

@@ -11,9 +11,8 @@ const exchangePage = () => {
       <ProtectedRoute>
     <div className="relative pb-5">
       <HeaderSection imgURL="/images/market/header.png" textDir="center" title="you Know and Trust" subtitle="All the Brands" />
-      <SearchInput href="/market/exchange/add-tool" title="Add Tool" placeholder="search for Tool"/>
-
-    </div>
+      <SearchInput href="/market/exchange/add-tool" name="Add Tool" placeholder="search for Tool"/>
+      </div>
     <div className='pt-10'>
       <ExchangeToolList />
     </div>
