@@ -4,7 +4,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Input from "@/components/auth/Input";
 import Label from "@/components/auth/Label";
 import { motion } from "framer-motion";
-
+import Image from "next/image";
 export default function EditPage() {
     return (
         <ProtectedRoute>
@@ -22,7 +22,7 @@ export default function EditPage() {
                             transition={{ duration: 0.4 }}
                             className="w-28 h-28 mb-4"
                         >
-                            <img src="/images/profile/pfp.svg" alt="Profile" className="rounded-full shadow-md" />
+                            <Image src="/images/profile/pfp.svg" width={150} height={150} alt="Profile" className="rounded-full shadow-md" />
                         </motion.div>
                         <div className="md:grid grid-cols-2 sm:flex gap-4 w-full">
                             <motion.div
