@@ -4,52 +4,30 @@ import { useEffect, useState } from "react";
 import ContentBox from "@/components/UI/profile/ContentBox";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ExchangeCard from "@/components/market/ExchangeCard";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchExchangeFav } from "@/redux/features/profile/profileThunk";
 export default function FavPage() {
-    const [exchanges, setExchanges] = useState([]);
+    const dispatch = useDispatch();
+    const { loading, favouriteExchanges, error } = useSelector((state) => state.profile);
 
     useEffect(() => {
-        const data = [
-            {
-                publisher: "Dr Ahmed",
-                name: "Cannies",
-                imageSrc: "/images/Profile/mirror.svg",
-                exchangeWith: "Second molar",
-                notes: "The tooth has a cavity.",
-                contact: "015080568",
-                date: "21/1/2025",
-                isFavorite: true,
-            },
-            {
-                publisher: "Dr Sara",
-                name: "Incisor",
-                imageSrc: "/images/Profile/tooth.svg",
-                exchangeWith: "First molar",
-                notes: "This tooth needs a root canal.",
-                contact: "015080569",
-                date: "22/1/2025",
-                isFavorite: true,
-            },
-        ];
-
-        setExchanges(data); 
-    }, []);
-
+        dispatch(fetchExchangeFav());
+    }, [dispatch]);
     return (
         <ProtectedRoute>
             <ContentBox title="Favorite Exchange">
                 <div className="flex flex-row flex-wrap pt-5 gap-5">
-                    {exchanges.map((exchange, index) => (
+                    {favouriteExchanges.map((exchange, index) => (
                         <ExchangeCard
                             key={index}
-                            publisher={exchange.publisher}
-                            name={exchange.name}
-                            imageSrc={exchange.imageSrc}
+                            publisher={exchange.publisher.name}
+                            name={exchange.toothName}
+                            imageSrc={exchange.images[0]}
                             exchangeWith={exchange.exchangeWith}
                             notes={exchange.notes}
                             contact={exchange.contact}
-                            date={exchange.date}
-                            isFavorite={exchange.isFavorite}
+                            date={exchange.createdAt}
+                            isFavExchange={exchange.isFavExchange}
                         />
                     ))}
                 </div>
