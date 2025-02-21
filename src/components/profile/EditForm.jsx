@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePatient } from "@/redux/features/profile/profileThunk";
 
-const EditForm = ({ fields, onSave, onClose }) => {
+const EditForm = ({ patientId, fields, onClose }) => {
+  const dispatch = useDispatch();
+  const { loading, msgUpdate } = useSelector(state => state.profile);
+  
   const [formData, setFormData] = useState(
     fields.reduce((acc, field) => ({ ...acc, [field.name]: field.value || "" }), {})
   );
+
+  useEffect(() => {
+    if (msgUpdate) {
+      alert(msgUpdate);
+      onClose();
+    }
+  }, [msgUpdate, onClose]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData); 
-    onClose();
+    e.preventDefault();    
+    dispatch(updatePatient({ patientId, formData }));
   };
 
   return (
@@ -37,14 +48,16 @@ const EditForm = ({ fields, onSave, onClose }) => {
             type="button"
             onClick={onClose}
             className="w-[150px] text-center bg-gray-400 text-white py-2 rounded-md hover:bg-gray-500 transition"
+            disabled={loading}
           >
             Cancel
           </button>
           <button
             type="submit"
             className="w-[150px] text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            disabled={loading}
           >
-            Save
+            {loading ? "Saving..." : "Save"}
           </button>
         </div>
       </form>

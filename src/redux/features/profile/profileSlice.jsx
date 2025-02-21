@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPatientCases, fetchPatientFav } from "@/redux/features/profile/profileThunk";
+import { fetchPatientCases, fetchPatientFav,updatePatient } from "@/redux/features/profile/profileThunk";
 
 const initialState = {
     favouritePatients: [],
@@ -7,6 +7,7 @@ const initialState = {
     loading: false,
     error: null,
     success: false,
+    msgUpdate:""
 };
 
 const profileSlice = createSlice({
@@ -34,7 +35,15 @@ const profileSlice = createSlice({
         .addCase(fetchPatientFav.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
-        });
+        }).addCase(updatePatient.pending, (state) => {
+            state.loading = true;
+        }).addCase(updatePatient.fulfilled, (state, action) => {
+            state.loading = false;
+            if (action.payload.message == "Patient updated successfully") {
+                state.msgUpdate="Patient updated successfully"
+            }
+            
+        })
     },
 });
 

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import EditForm from "./EditForm";
 import Fav from "../UI/Fav";
-import { Phone } from "lucide-react";
 
 const Card = ({
   type,
@@ -22,13 +21,14 @@ const Card = ({
         name: updatedData.name || name,
         additionalFields: additionalFields.map((field) => ({
           ...field,
-          value: updatedData[field.name] || field.value,
+          value: updatedData[field.name] !== undefined ? updatedData[field.name] : field.value,
         })),
       };
       onEdit(updatedObject);
     }
     setIsFormVisible(false);
   };
+  
 
   return (
     <div className="mb-6 w-full px-5">
@@ -82,7 +82,7 @@ const Card = ({
 
       {/* Edit Form */}
       {isFormVisible && (
-        <EditForm
+        <EditForm patientId={patientId}
           fields={[
             { label: "Name", name: "name", value: name },
             ...additionalFields,
