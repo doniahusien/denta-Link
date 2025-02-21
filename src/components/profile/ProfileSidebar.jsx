@@ -5,17 +5,18 @@ import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
- 
-export default function ProfileSidebar() {
-  const pathname = usePathname();
 
-  const menuItems = [
+
+export const menuItems = [
     { title: 'My posts', icon: '/images/icons/profile/posts.svg', href: '/posts' },
     { title: 'All orders', icon: '/images/icons/profile/orders.svg', href: '/orders' },
     { title: 'Privacy Policy', icon: '/images/icons/profile/privacy.svg', href: '/privacy' },
     { title: 'Terms & conditions', icon: '/images/icons/profile/terms.svg', href: '/terms' },
     { title: 'Favourite', icon: '/images/icons/profile/favourite.svg', href: '/favourite' },
-  ];
+];
+
+export default function ProfileSidebar() {
+  const pathname = usePathname();
 
   return (
     <div className="w-full max-w-sm md:w-80">
