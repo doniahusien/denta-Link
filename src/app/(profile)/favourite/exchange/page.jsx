@@ -27,6 +27,7 @@ export default function FavPage() {
                             notes={exchange.notes}
                             contact={exchange.contact}
                             date={exchange.createdAt}
+                            exchangeId={exchange._id}
                             isFavExchange={exchange.isFavExchange}
                         />
                     ))}
