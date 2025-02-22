@@ -15,7 +15,7 @@ export default function ProfilePage() {
   }, [dispatch]);
 
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-gray-500">Loading</p>;
 
   return (
     <ProtectedRoute>
