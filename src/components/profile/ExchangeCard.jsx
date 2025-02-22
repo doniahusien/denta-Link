@@ -4,20 +4,35 @@ import Image from "next/image";
 import EditForm from "./EditForm";
 import Fav from "../UI/Fav";
 import { Phone } from "lucide-react";
+import { format } from "date-fns";
 
-const ExchangeCard = ({ isFavorite, publisher, name, exchangeWith, notes, contact, date, imageSrc, onEdit }) => {
+const ExchangeCard = ({
+    isFavorite,
+    name,
+    publisher,
+    toothName,
+    exchangeWith,
+    notes,
+    contact,
+    createdAt,
+    imageSrc,
+    onEdit,
+    exchangeId,
+}) => {
     const [isFormVisible, setIsFormVisible] = useState(false);
-
     const toggleForm = () => setIsFormVisible(!isFormVisible);
+    const formattedDate = createdAt
+        ? format(new Date(createdAt), "MMMM dd, yyyy hh:mm a")
+        : "N/A";
 
     const handleSave = (updatedData) => {
         if (onEdit) {
             const updatedObject = {
-                name: updatedData.name || name,
+                toothName: updatedData.toothName || toothName,
                 exchangeWith: updatedData.exchangeWith || exchangeWith,
                 notes: updatedData.notes || notes,
                 contact: updatedData.contact || contact,
-                date: updatedData.date || date,
+                createdAt: updatedData.createdAt || createdAt,
             };
             onEdit(updatedObject);
         }
@@ -25,59 +40,65 @@ const ExchangeCard = ({ isFavorite, publisher, name, exchangeWith, notes, contac
     };
 
     return (
-        <div className="mb-6 w-full px-5 ">
-            <div className="relative flex flex-col md:flex-row items-center gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white ">
-                <div className=" rounded-lg p-5 md:w-[500px] sm:w-96 relative">
-                    <div className="flex flex-col gap-2 sm:flex-col md:flex-row justify-between items-center mb-4">
-                        <div>
+        <div className="mb-6 w-full px-4 sm:px-6 lg:px-8">
+            <div className="relative flex flex-col md:flex-row items-center md:items-start gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white w-full max-w-4xl mx-auto">
+                {/* Image & Details Section */}
+                <div className="rounded-lg p-5 w-full md:w-[500px] sm:w-96 relative">
+                    <div className="flex flex-col gap-2 sm:flex-row md:flex-row justify-between items-center md:items-start mb-4">
+                        {/* Image Section */}
+                        <div className="flex-shrink-0">
                             <Image
-                                src={imageSrc || "/images/default-tool.svg"}
-                                alt="Tooth icon"
+                                src={imageSrc}
+                                alt="Tool image"
                                 width={100}
                                 height={100}
-                                className="w-28 h-28"
+                                className="w-24 h-24 sm:w-28 sm:h-28"
                             />
                         </div>
-                        <div className="text-sm space-y-1">
+
+                        {/* Details */}
+                        <div className="text-sm space-y-2 sm:w-full sm:pl-4">
                             <p>
-                                <span className="font-semibold">Publisherrr :</span> {publisher}
+                                <span className="font-semibold">Publisher:</span> {publisher}
                             </p>
                             <p>
-                                <span className="font-semibold">Name:</span> {name}
+                                <span className="font-semibold">Tooth Name:</span> {toothName}
                             </p>
                             <p>
                                 <span className="font-semibold">Exchange with:</span> {exchangeWith}
                             </p>
                         </div>
-                        {isFavorite==true && <Fav fav={isFavorite} patientId={patientId} />}
 
-                        {/* Edit Icon */}
-                        {onEdit && (
-                            <button onClick={toggleForm} className="absolute top-8 right-2">
-                                <Image
-                                    src="/images/icons/profile/edit.svg"
-                                    alt="Edit"
-                                    width={20}
-                                    height={20}
-                                    className="cursor-pointer hover:opacity-80 transition"
-                                />
-                            </button>
-                        )}
+                        {/* Favorite & Edit */}
+                        <div className="flex items-center gap-2 absolute top-4 right-4">
+                            {isFavorite && exchangeId && <Fav fav={isFavorite} exchangeId={exchangeId} />}
+                            {onEdit && (
+                                <button onClick={toggleForm} className="cursor-pointer hover:opacity-80 transition">
+                                    <Image
+                                        src="/images/icons/profile/edit.svg"
+                                        alt="Edit"
+                                        width={20}
+                                        height={20}
+                                    />
+                                </button>
+                            )}
+                        </div>
                     </div>
 
+                    {/* Notes & Contact */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mt-4">
                         <div className="flex flex-col">
                             <span className="font-semibold text-gray-500">Notes:</span>
-                            <p>{notes}</p>
+                            <p className="text-gray-700">{notes}</p>
                         </div>
 
-                        <div className="text-left flex flex-col gap-1">
+                        <div className="text-left flex flex-col gap-1 mt-2 md:mt-0">
                             <span className="font-semibold text-gray-500">Contact:</span>
-                            <p className="text-black text-sm">
-                                <Phone className="inline w-4 h-4 mr-1" />
+                            <p className="text-black text-sm flex items-center">
+                                <Phone className="w-4 h-4 mr-1" />
                                 <span>{contact}</span>
                             </p>
-                            <p className="text-gray-400 text-xs">{date}</p>
+                            <p className="text-gray-400 text-xs">{formattedDate}</p>
                         </div>
                     </div>
                 </div>
@@ -85,17 +106,21 @@ const ExchangeCard = ({ isFavorite, publisher, name, exchangeWith, notes, contac
 
             {/* Edit Form */}
             {isFormVisible && (
-                <EditForm
-                    fields={[
-                        { label: "Name", name: "name", value: name },
-                        { label: "Exchange with", name: "exchangeWith", value: exchangeWith },
-                        { label: "Notes", name: "notes", value: notes },
-                        { label: "Contact", name: "contact", value: contact },
-                        { label: "Date", name: "date", value: date },
-                    ]}
-                    onSave={handleSave}
-                    onClose={() => setIsFormVisible(false)}
-                />
+                <div className="w-full max-w-3xl mx-auto mt-4">
+                    <EditForm
+                        fields={[
+                            { label: "Name", name: "name", value: name || "" },
+                            { label: "Tooth Name", name: "toothName", value: toothName },
+                            { label: "Exchange with", name: "exchangeWith", value: exchangeWith },
+                            { label: "Notes", name: "notes", value: notes },
+                            { label: "Contact", name: "contact", value: contact },
+                            { label: "Created At", name: "createdAt", value: createdAt },
+                        ]}
+                        onSave={handleSave}
+                        exchangeId={exchangeId}
+                        onClose={() => setIsFormVisible(false)}
+                    />
+                </div>
             )}
         </div>
     );
