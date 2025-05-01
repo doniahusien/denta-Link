@@ -1,29 +1,56 @@
 "use client";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// Patient
 import { fetchPatientsByTitle } from "@/redux/features/patient/patientThunk";
 import { setSearchTerm } from "@/redux/features/patient/patientSlice";
-import { setSearchTool } from "@/redux/features/exchange/exchangeSlice";
+
+// Exchange
 import { fetchExchangeByName } from "@/redux/features/exchange/exchangeThunk";
+import { setSearchTool as setExchangeSearchTool } from "@/redux/features/exchange/exchangeSlice";
+
+// Tool
+import { fetchToolByName } from "@/redux/features/tools/toolThunk";
+import { setSearchTool as setToolSearchTool } from "@/redux/features/tools/toolSlice";
+
 import Link from "next/link";
 
-const SearchInput = ({ href, title, name, placeholder }) => {
+const SearchInput = ({ href, title, name, tool, placeholder }) => {
   const dispatch = useDispatch();
-  const searchTerm = useSelector((state) => state.patient.searchTerm);
-  const searchTool = useSelector((state) => state.exchange.searchTool);
 
+  // Redux state selectors
+  const searchTerm = useSelector((state) => state.patient.searchTerm);
+  const exchangeSearchTerm = useSelector((state) => state.exchange.searchTool);
+  const toolSearchTerm = useSelector((state) => state.tool.searchTool);
+
+  // Dynamic input value
+  const inputValue = title
+    ? searchTerm
+    : name
+    ? exchangeSearchTerm
+    : tool
+    ? toolSearchTerm
+    : "";
+
+  // Handle input changes
   const handleSearch = (e) => {
     const value = e.target.value;
 
     if (title) {
       dispatch(setSearchTerm(value));
       if (value.length >= 3) {
-        dispatch(fetchPatientsByTitle(value)); 
+        dispatch(fetchPatientsByTitle(value));
       }
     } else if (name) {
-      dispatch(setSearchTool(value));
+      dispatch(setExchangeSearchTool(value));
       if (value.length >= 3) {
-        dispatch(fetchExchangeByName(value)); 
+        dispatch(fetchExchangeByName(value));
+      }
+    } else if (tool) {
+      dispatch(setToolSearchTool(value));
+      if (value.length >= 3) {
+        dispatch(fetchToolByName(value));
       }
     }
   };
@@ -35,7 +62,7 @@ const SearchInput = ({ href, title, name, placeholder }) => {
           <input
             type="text"
             placeholder={placeholder}
-            value={title ? searchTerm : searchTool}
+            value={inputValue}
             onChange={handleSearch}
             className="w-full md:w-2/3 px-4 py-2 text-gray-700 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-3 md:mb-0"
           />
@@ -43,7 +70,7 @@ const SearchInput = ({ href, title, name, placeholder }) => {
             href={href}
             className="bg-blue-500 text-white w-full md:w-auto text-center px-4 py-2 rounded-md text-sm hover:bg-blue-600"
           >
-            {title || name}
+            {title || name || tool}
           </Link>
         </div>
       </div>
@@ -52,5 +79,3 @@ const SearchInput = ({ href, title, name, placeholder }) => {
 };
 
 export default SearchInput;
-
-
