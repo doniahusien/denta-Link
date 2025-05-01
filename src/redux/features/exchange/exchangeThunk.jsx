@@ -6,7 +6,7 @@ export const fetchAllExchanges = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch("http://localhost:3000/api/exchanges", {
+            const response = await fetch("https://backend-production-2daf.up.railway.app/api/exchanges", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const toggleFavorite = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("http://localhost:3000/api/exchanges/toggle", {
+            const response = await fetch("https://backend-production-2daf.up.railway.app/api/exchanges/toggle", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ export const fetchExchangeByName = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`http://localhost:3000/api/exchanges/search?toothName=${name}`, {
+            const response = await fetch(`https://backend-production-2daf.up.railway.app/api/exchanges/search?query=${name}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ export const addExchange = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("http://localhost:3000/api/exchanges/add", {
+            const response = await fetch("https://backend-production-2daf.up.railway.app/api/exchanges/add", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
