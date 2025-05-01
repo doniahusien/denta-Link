@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import { Heart } from 'lucide-react';
 import { toggleFavorite as togglePatientFavorite } from "@/redux/features/patient/patientThunk";
 import { toggleFavorite as toggleExchangeFavorite } from "@/redux/features/exchange/exchangeThunk";
+import { toggleFavorite  as toggleToolFavorite} from '@/redux/features/tools/toolThunk';
 
 
-const Fav = ({ fav, patientId, exchangeId }) => {
+const Fav = ({ fav, patientId, exchangeId,toolId }) => {
     const dispatch = useDispatch();
     const [liked, setLiked] = useState(fav);
     const [isUpdating, setIsUpdating] = useState(false);
@@ -22,6 +23,10 @@ const Fav = ({ fav, patientId, exchangeId }) => {
                 console.log("Toggling favorite for exchangeId:", exchangeId);
 
                 await dispatch(toggleExchangeFavorite(exchangeId)).unwrap();
+            }else if (toolId) {
+                console.log("Toggling favorite for exchangeId:", toolId);
+
+                await dispatch(toggleToolFavorite(toolId)).unwrap();
             }
         } catch (error) {
             console.error("Failed to toggle favorite:", error);
