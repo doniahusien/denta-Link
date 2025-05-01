@@ -9,7 +9,7 @@ const shopPage = () => {
       <ProtectedRoute>
       <div className="relative pb-5">
         <HeaderSection imgURL="/images/market/header.png" textDir="center" title="you Know and Trust" subtitle="All the Brands" />
-        <SearchInput href="/market/shop/add-tool" title="Add Tool" placeholder="search for tool" />
+        <SearchInput href="/market/shop/add-tool" tool="Add Tool" placeholder="search for tool" />
 
       </div>
       <div className='pt-10'>
