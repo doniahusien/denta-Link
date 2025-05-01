@@ -3,37 +3,14 @@ import { useState, useEffect } from 'react';
 import ContentBox from '@/components/UI/profile/ContentBox';
 import OrderCard from '@/components/profile/OrderCard';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyOrders } from '@/redux/features/cart/cartThunk';
 export default function ProfilePage() {
-  const [orders, setOrders] = useState([]);
-
-
+  const dispatch = useDispatch();
+  const { orders, loading, error } = useSelector((state) => state.cart);
+const imgsrc="/images/Profile/mirror.svg"
   useEffect(() => {
-
-    const fakeData = [
-      {
-        orderNumber: "3256205",
-        orderDate: "25/4/2025",
-        totalAmount: "250LE",
-        imageSrc: "/images/Profile/mirror.svg"
-      },
-      {
-        orderNumber: "3256206",
-        orderDate: "30/4/2025",
-        totalAmount: "300LE",
-        imageSrc: "/images/Profile/mirror.svg"
-      },
-      {
-        orderNumber: "3256207",
-        orderDate: "2/5/2025",
-        totalAmount: "150LE",
-        imageSrc: "/images/Profile/mirror.svg"
-      }
-    ];
-
-
-    setTimeout(() => {
-      setOrders(fakeData);
-    }, 1000);
+dispatch(getMyOrders())
   }, []);
 
   return (
@@ -44,9 +21,9 @@ export default function ProfilePage() {
           <OrderCard 
             key={order.orderNumber}
             orderNumber={order.orderNumber}
-            orderDate={order.orderDate}
-            totalAmount={order.totalAmount}
-            imageSrc={order.imageSrc}
+            orderDate={new Date(order.createdAt).toLocaleString()}
+            totalAmount={order.totalPrice}
+            imageSrc={imgsrc}
           />
         ))}
       </div>
