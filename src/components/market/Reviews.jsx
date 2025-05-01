@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Reviews = ({ reviews }) => {
     return (
-        <div className="space-y-8 p-10 shadow-md">
+  
             <div className="pt-10">
                 <div className="flex justify-between items-center mb-2">
                     <h3 className="text-xl font-semibold">Reviews ({reviews.length})</h3>
@@ -28,10 +28,7 @@ const Reviews = ({ reviews }) => {
                     </div>
                 ))}
             </div>
-            <button className="w-full text-xl bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors">
-                Add to cart
-            </button>
-        </div>
+         
     );
 };
 
