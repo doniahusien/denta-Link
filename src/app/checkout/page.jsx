@@ -1,34 +1,24 @@
 "use client";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import CartItem from "@/components/cart/cartItem";
 import Button from "@/components/UI/Button/Button";
 import { motion } from "framer-motion";
+import { getCart, getOrderSummary } from "@/redux/features/cart/cartThunk";
 import ProtectedRoute from "@/components/ProtectedRoute";
 const CheckoutPage = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Dental Drill",
-      description: "Used to remove decay and shape teeth for fillings or crowns",
-      price: 1200,
-      quantity: 1,
-      image: "drill.svg",
-    },
-    {
-      id: 2,
-      name: "Dental Drill",
-      description: "Used to remove decay and shape teeth for fillings or crowns",
-      price: 1200,
-      quantity: 1,
-      image: "drill.svg",
-    },
-  ]);
 
-  const DELIVERY_FEE = 70;
-  const DISCOUNT = 0;
-  const productTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const total = productTotal + DELIVERY_FEE - DISCOUNT;
+  const dispatch = useDispatch();
+  const { items,  productTotal,
+    deliveryFee,
+        discount,
+        total, loading, error } = useSelector((state) => state.cart);
+  useEffect(() => {
+    dispatch(getCart())
+    dispatch(getOrderSummary())
+  }
+  , []);
 
   return (
     <ProtectedRoute>
@@ -41,9 +31,9 @@ const CheckoutPage = () => {
       <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
 
       <div className="space-y-4">
-        {cartItems.map((item, index) => (
+        {items.map((item, index) => (
           <motion.div
-            key={item.id}
+            key={index}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -68,11 +58,11 @@ const CheckoutPage = () => {
           </div>
           <div className="flex justify-between">
             <span>Delivery fee</span>
-            <span>{DELIVERY_FEE} LE</span>
+            <span>{deliveryFee} LE</span>
           </div>
           <div className="flex justify-between">
             <span>Discount</span>
-            <span>{DISCOUNT} LE</span>
+            <span>{discount} LE</span>
           </div>
           <hr className="my-2" />
           <div className="flex justify-between font-semibold text-lg">
