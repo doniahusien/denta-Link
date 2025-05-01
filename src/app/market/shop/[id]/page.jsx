@@ -1,6 +1,9 @@
 'use client';
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+
 import DetailImage from '@/components/UI/DetailImage';
 import DetailInfo from '@/components/UI/DetailInfo';
 import PublisherInfo from '@/components/market/PublisherInfo';
@@ -8,73 +11,113 @@ import Reviews from '@/components/market/Reviews';
 import RelatedProducts from '@/components/market/RelatedProducts';
 import Fav from '@/components/UI/Fav';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import { addToCart } from '@/redux/features/cart/cartThunk';
+import { fetchToolById } from '@/redux/features/tools/toolThunk';
+
 const ToolDetails = () => {
     const { id } = useParams();
+    const dispatch = useDispatch();
+    const { tool, loading, error } = useSelector((state) => state.tool);
+    const handleAddToCart = () => { 
+        if (id) {
+            dispatch(addToCart(id));
+        } else {
+            console.error('Tool ID is undefined');
+        }
+    }
+    useEffect(() => {
+        if (id) {
+            dispatch(fetchToolById(id));
+        } else {
+            console.error('Tool ID is undefined');
+        }
+    }, [dispatch, id]);
 
-    const tool = {
-        name: 'Curette',
-        price: '250',
-        description: 'A sharp, hook-like tool used to detect cavities, plaque, or tartar buildup',
-        category: 'Endodontics',
-        publisher: 'Dentsply Sirona',
-        image: "/images/market/tool.svg",
-    };
+    if (loading) return <p className="text-center py-20">Loading tool details...</p>;
+    if (error) return <p className="text-center py-20 text-red-500">Error: {error}</p>;
+    if (!tool) return <p className="text-center py-20">No tool found.</p>;
 
     const publisher = {
         name: 'Dentsply Sirona',
-        description: 'One of the largest manufacturers of dental equipment and supplies. They produce everything from hand instruments to imaging systems.',
+        description:
+            'One of the largest manufacturers of dental equipment and supplies. They produce everything from hand instruments to imaging systems.',
     };
 
     const reviews = [
-        { user: 'Roaa', date: '12/10/2023', comment: 'Excellent Quality and Precision – A Must-Have for Dental Professionals!' },
+        {
+            user: 'Roaa',
+            date: '12/10/2023',
+            comment: 'Excellent Quality and Precision – A Must-Have for Dental Professionals!',
+        },
     ];
 
     const relatedProducts = [
-        { id: 1, name: 'Curette', price: '200', description: 'for deep cleaning', image: "/images/market/tool.svg" },
-        { id: 2, name: 'Curette', price: '200', description: 'for deep cleaning', image: "/images/market/tool.svg" },
+        {
+            id: 1,
+            name: 'Curette',
+            price: '200',
+            description: 'for deep cleaning',
+            image: '/images/market/tool.svg',
+        },
+        {
+            id: 2,
+            name: 'Curette',
+            price: '200',
+            description: 'for deep cleaning',
+            image: '/images/market/tool.svg',
+        },
     ];
 
     return (
         <ProtectedRoute>
-        <div className="max-w-7xl mx-auto py-44">
-            <div className="space-y-12">
-                <h2 className="text-3xl font-semibold pl-10">Product details</h2>
+            <div className="max-w-7xl mx-auto py-44 px-4">
+                <div className="space-y-12">
+                    <h2 className="text-3xl font-semibold">Product Details</h2>
 
-                <div className="flex flex-col sm:gap-5 md:gap-10 lg:gap-16">
                     {/* Row 1: Image & Info */}
-                    <div className="flex flex-col lg:flex-row gap-20 shadow-lg">
-                        <div className='relative'>
-                            <DetailImage image={tool.image} alt={tool.name} />
-                        <Fav />
+                    <div className="flex flex-col lg:flex-row gap-10 shadow-lg p-4 rounded-lg bg-white">
+                        <div className="relative h-96 w-full lg:w-1/2">
+                            <DetailImage
+                                image={
+                                    tool?.images
+                                }
+                                alt={tool?.toolName || "Tool image"}
+                                tool
+                            />
+                            <Fav fav={tool.isFavoriteTool} toolId={id} />
                         </div>
-                        
+
                         <DetailInfo
-                            name={tool.name}
+                            name={tool.toolName}
                             price={tool.price}
                             description={tool.description}
                             category={tool.category}
-                            publisher={tool.publisher}
+                            publisher={tool.createdBy?.name}
                         />
                     </div>
 
-                    {/* Row 2: Publisher Info & Reviews */}
-                    <div className="flex flex-col lg:flex-row gap-10 justify-between lg:px-10">
+
+                    <div className="flex flex-col lg:flex-row gap-10 justify-between">
                         <PublisherInfo
                             publisher={publisher}
                             address="123 Elm Street, Apt 4B, Springfield, IL 62704, USA"
                             contact="+999585106845"
                         />
-                        <Reviews reviews={reviews} />
+                        <div className="space-y-8 p-10 shadow-md">
+                            <Reviews reviews={reviews} />
+                            <button onClick={handleAddToCart} className="w-full text-xl bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors">
+                                Add to cart
+                            </button>
+                        </div>
                     </div>
 
                     {/* Row 3: Related Products */}
-                    <div className="flex flex-col lg:flex-row">
+                    <div>
                         <RelatedProducts products={relatedProducts} />
                     </div>
                 </div>
             </div>
-            </div>
-            </ProtectedRoute>
+        </ProtectedRoute>
     );
 };
 
