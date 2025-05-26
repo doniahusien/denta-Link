@@ -22,7 +22,7 @@ const ToolList = () => {
                 {tools.map((tool, index) => (
                     <ToolCard
                         key={index}
-                        image={tool.images[0]}
+                        image={tool.images}
                         name={tool.toolName}
                         id={tool._id}
                         price={tool.price}

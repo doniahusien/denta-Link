@@ -18,9 +18,9 @@ const ToolDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { tool, loading, error } = useSelector((state) => state.tool);
-    const handleAddToCart = () => { 
+    const handleAddToCart = () => {
         if (id) {
-            dispatch(addToCart(id));
+            dispatch(addToCart({ toolId: id, quantity: 1 }))
         } else {
             console.error('Tool ID is undefined');
         }
