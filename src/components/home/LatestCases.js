@@ -17,8 +17,8 @@ export default function LatestCases({ cases = [] }) {
                 {/* Doctor Avatar */}
                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden bg-blue-500">
                   <Image
-                    src={item.image}
-                    alt={item.doctor}
+                    src={item.images[0]}
+                    alt={item.name}
                     width={64}
                     height={64}
                     className="object-cover w-full h-full"
@@ -27,7 +27,7 @@ export default function LatestCases({ cases = [] }) {
 
                 {/* Doctor Info */}
                 <div>
-                  <p className="font-semibold text-base md:text-lg">{item.doctor}</p>
+                  <p className="font-semibold text-base md:text-lg">{item.name}</p>
                   <p className="text-gray-500 text-sm">Location: {item.location}</p>
                   <p className="text-gray-500 text-sm">Title: {item.title}</p>
                 </div>

@@ -5,11 +5,20 @@ import ToolsSection from "@/components/home/ToolsSection";
 import ServicesSection from "@/components/home/ServicesSection";
 import ConnectSection from "@/components/home/ConnectSection";
 import LatestCases from "@/components/home/LatestCases";
-
+import { fetchLatestPatients } from "@/redux/features/patient/patientThunk";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-
+  const dispatch = useDispatch();
+  const { latestpatient } = useSelector((state) => state.patient);
+  useEffect(() => {
+    dispatch(fetchLatestPatients());
+    console.log(latestpatient);
+    
+  }
+  , [dispatch]);
   useEffect(() => {
     setIsLoaded(true);
 
@@ -36,28 +45,28 @@ export default function Home() {
 
   const cases1 = [
     {
-      doctor: "Dr. Ahmed Abdelfatah",
+      name: "Dr. Ahmed Abdelfatah",
       location: "Mansoura",
       title: "Cavities",
-      image: "/images/Home/doctor.svg"
+      images: ["/images/Home/doctor.svg"]
     },
     {
-      doctor: "Dr. Ahmed",
+      name: "Dr. Ahmed",
       location: "Cairo",
       title: "Root Canal",
-      image: "images/Home/doctor.svg"
+      images: ["images/Home/doctor.svg"]
     },
     {
-      doctor: "Dr. Sara",
+      name: "Dr. Sara",
       location: "Alexandria",
       title: "Teeth Whitening",
-      image: "images/Home/doctor.svg"
+      images: ["images/Home/doctor.svg"]
     },
     {
-      doctor: "Dr. Ali",
+      name: "Dr. Ali",
       location: "Giza",
       title: "Braces",
-      image: "images/Home/doctor.svg"
+      images: ["images/Home/doctor.svg"]
     }
   ];
 
@@ -101,7 +110,7 @@ export default function Home() {
         </div>
 
         <div className="animate-on-scroll" style={{ animationDelay: '800ms' }}>
-          <LatestCases cases={cases1} />
+          <LatestCases cases={latestpatient?.length ? latestpatient : cases1} />
         </div>
 
         {/* Spacer for Footer */}
