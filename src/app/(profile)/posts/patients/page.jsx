@@ -6,7 +6,7 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import Card from '@/components/profile/ToolCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPatientCases } from '@/redux/features/profile/profileThunk';
-
+import { deletePatientCase } from '@/redux/features/profile/profileThunk';
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const { mypatients, loading } = useSelector(state => state.profile);
@@ -21,7 +21,7 @@ export default function ProfilePage() {
     <ProtectedRoute>
       <ContentBox title="Patients">
         <div className="flex flex-col ">
-          
+
 
           {mypatients.length > 0 ? (mypatients.map((patient) => (
             <Card
@@ -30,17 +30,18 @@ export default function ProfilePage() {
               type="patient"
               imageSrc={patient.images[0]}
               additionalFields={[
-                { label: "Age",name:"age",  value: patient.age },
-                { label: "Title",name:"title",  value: patient.title },
-                { label: "Gender",name:"gender", value: patient.gender },
-                { label: "Phone Number",name:"phone",  value: patient.phone },
-                { label: "Category",name:"category",  value: patient.category },
-                { label: "Description",name:"description",  value: patient.description }
+                { label: "Age", name: "age", value: patient.age },
+                { label: "Title", name: "title", value: patient.title },
+                { label: "Gender", name: "gender", value: patient.gender },
+                { label: "Phone Number", name: "phone", value: patient.phone },
+                { label: "Category", name: "category", value: patient.category },
+                { label: "Description", name: "description", value: patient.description }
               ]}
               patientId={patient._id}
-              description={patient.description}
               onEdit={(updatedData) => console.log("Updated Patient:", updatedData)}
+              onDelete={() => dispatch(deletePatientCase(patient._id))} 
             />
+
 
           ))) : (<>
             <p>Not found</p>
