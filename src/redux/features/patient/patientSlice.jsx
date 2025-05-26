@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllPatients, addPatient, fetchPatientsByTitle, fetchPatientById, toggleFavorite } from "./patientThunk";
+import { fetchLatestPatients, fetchAllPatients, addPatient, fetchPatientsByTitle, fetchPatientById, toggleFavorite } from "./patientThunk";
 
 const initialState = {
     patients: [],
+    latestpatient:[],
     patient: null,
     loading: false,
     error: null,
@@ -84,7 +85,20 @@ const patientSlice = createSlice({
             })
             .addCase(toggleFavorite.rejected, (state, action) => {
                 state.error = action.payload.message;
+            }).addCase(fetchLatestPatients.pending, (state) => {
+                state.loading = true;
+                state.error = null;
             })
+            .addCase(fetchLatestPatients.fulfilled, (state, action) => {
+                state.loading = false;
+                state.latestpatient = action.payload;
+                state.error = null;
+            })
+            .addCase(fetchLatestPatients.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
 
     },
 });

@@ -1,18 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
 export const addToCart = createAsyncThunk(
     'cart/addToCart',
-    async (toolId, { getState, rejectWithValue }) => {
+    async ({ toolId, quantity = 1 }, { getState, rejectWithValue, dispatch }) => {
         try {
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch('http://localhost:3000/api/carts/add', {
+            const response = await fetch('https://backend-production-0555.up.railway.app/api/cart/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({ toolId }),
+                body: JSON.stringify({
+                    tools: [
+                        { toolId, quantity }
+                    ]
+                }),
             });
 
             if (!response.ok) {
@@ -20,12 +25,15 @@ export const addToCart = createAsyncThunk(
             }
 
             const data = await response.json();
+            await dispatch(getCart());
+
             return data;
         } catch (error) {
             return rejectWithValue(error.message);
         }
     }
 );
+
 
 
 export const getCart = createAsyncThunk(
@@ -35,7 +43,7 @@ export const getCart = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch('http://localhost:3000/api/carts/', {
+            const response = await fetch('https://backend-production-0555.up.railway.app/api/cart', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,93 +63,19 @@ export const getCart = createAsyncThunk(
     }
 );
 
-export const incrementCartItem = createAsyncThunk(
-    'cart/incrementCartItem',
-    async (cartItemId, { getState, rejectWithValue }) => {
-        try {
-            const token = getState().auth.token;
-
-            const response = await fetch(`http://localhost:3000/api/carts/increment/${cartItemId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to increment cart item');
-            }
-
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
-export const decrementCartItem = createAsyncThunk(
-    'cart/decrementCartItem',
-    async (cartItemId, { getState, rejectWithValue }) => {
-        try {
-            const token = getState().auth.token;
-
-            const response = await fetch(`http://localhost:3000/api/carts/decrement/${cartItemId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to decrement cart item');
-            }
-
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
-
-export const getSuggestedItems = createAsyncThunk(
-    'cart/getSuggestedItems',
-    async (_, { getState, rejectWithValue }) => {
-        try {
-            const token = getState().auth.token;
-
-            const response = await fetch('http://localhost:3000/api/carts/suggested', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch suggested items');
-            }
-
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
 export const removeCartItem = createAsyncThunk(
     'cart/removeCartItem',
-    async (cartItemId, { getState, rejectWithValue }) => {
+    async ({ toolId }, { getState, rejectWithValue, dispatch }) => {
         try {
             const token = getState().auth.token;
 
-            const response = await fetch(`http://localhost:3000/api/carts/remove/${cartItemId}`, {
+            const response = await fetch('https://backend-production-0555.up.railway.app/api/cart/remove', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
+                body: JSON.stringify({ toolId }),
             });
 
             if (!response.ok) {
@@ -149,12 +83,27 @@ export const removeCartItem = createAsyncThunk(
             }
 
             const data = await response.json();
+            await dispatch(getCart());
+
             return data;
         } catch (error) {
             return rejectWithValue(error.message);
         }
     }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const getOrderSummary = createAsyncThunk(
     'order/getOrderSummary',

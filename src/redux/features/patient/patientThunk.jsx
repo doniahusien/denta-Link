@@ -6,7 +6,7 @@ export const fetchAllPatients = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch("https://backend-production-2daf.up.railway.app/api/patients", {
+            const response = await fetch("https://backend-production-0555.up.railway.app/api/patients", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -14,7 +14,6 @@ export const fetchAllPatients = createAsyncThunk(
             });
             if (!response.ok) {
                 const errorData = await response.json();
-                //throw new Error(errorData.message || "Failed to fetch patients");
                 console.log(errorData.message);
                 
             }
@@ -33,7 +32,7 @@ export const addPatient = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-2daf.up.railway.app/api/patients/add", {
+            const response = await fetch("https://backend-production-0555.up.railway.app/api/patients/add", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -60,7 +59,7 @@ export const fetchPatientsByTitle = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`https://backend-production-2daf.up.railway.app/api/patients/search?title=${title}`, {
+            const response = await fetch(`https://backend-production-0555.up.railway.app/api/patients/search?query=${title}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -84,7 +83,7 @@ export const fetchPatientById = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`https://backend-production-2daf.up.railway.app/api/patients/${id}`, {
+            const response = await fetch(`https://backend-production-0555.up.railway.app/api/patients/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -110,7 +109,7 @@ export const toggleFavorite = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-2daf.up.railway.app/api/patients/toggle", {
+            const response = await fetch("https://backend-production-0555.up.railway.app/api/patients/toggle", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -126,6 +125,34 @@ export const toggleFavorite = createAsyncThunk(
 
             const data = await response.json();
             return { patientId, message: data.message };
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+
+export const fetchLatestPatients = createAsyncThunk(
+    "patient/fetchLatestPatients",
+    async (_, { rejectWithValue, getState }) => {
+        try {
+            const state = getState();
+            const token = state.auth.token;
+
+            const response = await fetch("https://backend-production-0555.up.railway.app/api/patients/latest", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Failed to fetch latest patients");
+            }
+
+            const data = await response.json();
+            return data;
         } catch (error) {
             return rejectWithValue(error.message);
         }

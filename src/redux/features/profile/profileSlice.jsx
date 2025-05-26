@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPatientCases, fetchPatientFav, updatePatient, fetchExchangeFav, fetchMyExchanges, updateExchange } from "@/redux/features/profile/profileThunk";
+import { fetchMyTools, fetchFav, fetchPatientCases, updatePatient, fetchMyExchanges, updateExchange, updateTool, deleteExchange, deletePatientCase, deleteTool } from "@/redux/features/profile/profileThunk";
 
 const initialState = {
     favouritePatients: [],
     favouriteExchanges: [],
+    favouriteTools: [],
     mypatients: [],
     myExchanges: [],
+    myTools: [],
     loading: false,
     error: null,
     success: false,
@@ -25,7 +27,7 @@ const profileSlice = createSlice({
             state.error = null;
             state.loading = true;
         }).addCase(fetchPatientCases.fulfilled, (state, action) => {
-            state.mypatients = action.payload.data;
+            state.mypatients = action.payload;
             state.error = null;
             state.loading = false;
         })
@@ -33,35 +35,14 @@ const profileSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             })
-            .addCase(fetchPatientFav.fulfilled, (state, action) => {
-                state.favouritePatients = action.payload;
-                state.error = null;
-                state.loading = false;
-            })
-            .addCase(fetchPatientFav.rejected, (state, action) => {
-                state.error = action.payload;
-                state.loading = false;
-            }).addCase(updatePatient.pending, (state) => {
-                state.loading = true;
-            }).addCase(updatePatient.fulfilled, (state, action) => {
+
+            .addCase(updatePatient.fulfilled, (state, action) => {
                 state.loading = false;
                 if (action.payload.message == "Patient updated successfully") {
                     state.msgUpdate = "Patient updated successfully"
                 }
             })
-            .addCase(fetchExchangeFav.pending, (state) => {
-                state.error = null;
-                state.loading = true;
-            })
-            .addCase(fetchExchangeFav.fulfilled, (state, action) => {
-                state.favouriteExchanges = action.payload;
-                state.error = null;
-                state.loading = false;
-            })
-            .addCase(fetchExchangeFav.rejected, (state, action) => {
-                state.error = action.payload;
-                state.loading = false;
-            }).addCase(fetchMyExchanges.pending, (state) => {
+            .addCase(fetchMyExchanges.pending, (state) => {
                 state.error = null;
                 state.loading = true;
             }).addCase(fetchMyExchanges.fulfilled, (state, action) => {
@@ -80,6 +61,64 @@ const profileSlice = createSlice({
                     state.msgUpdate = "Exchange updated successfully!"
                 }
             })
+
+        builder.addCase(fetchMyTools.pending, (state) => {
+            state.error = null;
+            state.loading = true;
+        }).addCase(fetchMyTools.fulfilled, (state, action) => {
+            state.myTools = action.payload;
+            state.error = null;
+            state.loading = false;
+        })
+            .addCase(fetchMyTools.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            })
+
+            .addCase(updateTool.pending, (state) => {
+                state.loading = true;
+            }).addCase(updateTool.fulfilled, (state, action) => {
+                state.loading = false;
+                state.msgUpdate = "Tool updated successfully!"
+
+            })
+            .addCase(fetchFav.pending, (state) => {
+                state.error = null;
+                state.loading = true;
+            }).addCase(fetchFav.fulfilled, (state, action) => {
+                state.favouritePatients = action.payload.favoritePatients;
+                state.favouriteExchanges = action.payload.favoriteExchanges;
+                state.favouriteTools = action.payload.favoriteTools;
+                state.error = null;
+                state.loading = false;
+            })
+            .addCase(fetchFav.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            })
+            .addCase(deletePatientCase.fulfilled, (state, action) => {
+                state.mypatients = state.mypatients.filter(patient => patient.id !== action.payload);
+                state.loading = false;
+            })
+            .addCase(deletePatientCase.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(deletePatientCase.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(deleteExchange.fulfilled, (state, action) => {
+                state.myExchanges = state.myExchanges.filter(exchange => exchange._id !== action.payload);
+            })
+            .addCase(deleteExchange.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            .addCase(deleteTool.fulfilled, (state, action) => {
+                state.myTools = state.myTools.filter(tool => tool.id !== action.payload);
+                state.loading = false;
+            })
+
     },
 });
 
