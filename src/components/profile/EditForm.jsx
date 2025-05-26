@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePatient, updateExchange } from "@/redux/features/profile/profileThunk";
+import { updatePatient, updateExchange,updateTool } from "@/redux/features/profile/profileThunk";
 import { clearUpdateMessage } from "@/redux/features/profile/profileSlice";
 
-const EditForm = ({ patientId, fields, onClose, exchangeId }) => {
+const EditForm = ({ patientId, fields, onClose, exchangeId,toolId }) => {
   const dispatch = useDispatch();
   const { loading, msgUpdate } = useSelector((state) => state.profile);
 
@@ -33,7 +33,11 @@ const EditForm = ({ patientId, fields, onClose, exchangeId }) => {
     if (patientId) {
       dispatch(updatePatient({ patientId, formData: updatedData }));
     } else if (exchangeId) {
+      console.log("Updating exchange with data:",exchangeId, updatedData);
       dispatch(updateExchange({ exchangeId, formData: updatedData }));
+    }
+    else if( toolId) {
+      dispatch(updateTool({ toolId, formData: updatedData }));
     }
   };
 

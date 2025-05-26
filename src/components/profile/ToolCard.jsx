@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import EditForm from "./EditForm";
 import Fav from "../UI/Fav";
+import { Pencil, Trash2 } from "lucide-react"; // Use lucide icons
 
 const Card = ({
   type,
@@ -10,31 +11,35 @@ const Card = ({
   name,
   additionalFields = [],
   onEdit,
+  onDelete, // NEW
   patientId,
+  toolId,
   isFavorite = false
 }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
+
   const toggleForm = () => setIsFormVisible(!isFormVisible);
+
   const handleSave = (updatedData) => {
     if (onEdit) {
       const updatedObject = {
         name: updatedData.name || name,
         additionalFields: additionalFields.map((field) => ({
           ...field,
-          value: updatedData[field.name] !== undefined ? updatedData[field.name] : field.value,
+          value:
+            updatedData[field.name] !== undefined
+              ? updatedData[field.name]
+              : field.value,
         })),
       };
       onEdit(updatedObject);
     }
     setIsFormVisible(false);
   };
-  
 
   return (
     <div className="mb-6 w-full px-5">
-      <div className="flex flex-col">
-        
-      </div>
+      <div className="flex flex-col" />
       <div className="relative flex flex-col md:flex-row items-start gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white w-[700px]">
 
         {/* Image Section */}
@@ -48,7 +53,7 @@ const Card = ({
           />
         </div>
 
-        {/* Details Section */}
+        {/* Details */}
         <div className="flex-1">
           <p className="text-sm text-gray-500">
             {`${type.charAt(0).toUpperCase() + type.slice(1)} Name:`}{" "}
@@ -56,33 +61,43 @@ const Card = ({
           </p>
           {additionalFields.map(({ label, value, color }, index) => (
             <p key={`${label}-${index}`} className="text-sm text-gray-500">
-              {label}: <span className={`font-semibold ${color || "text-gray-700"}`}>{value}</span>
+              {label}:{" "}
+              <span className={`font-semibold ${color || "text-gray-700"}`}>
+                {value}
+              </span>
             </p>
           ))}
-
-
         </div>
 
         {isFavorite && <Fav fav={isFavorite} patientId={patientId} />}
 
-        {/* Edit Icon */}
-        {onEdit && (
-          <button onClick={toggleForm} className="absolute top-3 right-3">
-            <Image
-              src="/images/icons/profile/edit.svg"
-              alt="Edit"
-              width={20}
-              height={20}
-              className="cursor-pointer hover:opacity-80 transition"
-            />
-          </button>
-        )}
+        {/* Action Icons */}
+        <div className="absolute top-3 right-3 flex gap-2">
+          {onEdit && (
+            <button onClick={toggleForm} title="Edit">
+              <Pencil className="w-5 h-5 text-blue-500 hover:text-blue-700" />
+            </button>
+          )}
+          {onDelete && (
+            <button
+              onClick={() => {
+                if (confirm("Are you sure you want to delete this item?")) {
+                  onDelete();
+                }
+              }}
+              title="Delete"
+            >
+              <Trash2 className="w-5 h-5 text-red-500 hover:text-red-700" />
+            </button>
+          )}
+        </div>
       </div>
-
 
       {/* Edit Form */}
       {isFormVisible && (
-        <EditForm patientId={patientId}
+        <EditForm
+          patientId={patientId}
+          toolId={toolId}
           fields={[
             { label: "Name", name: "name", value: name },
             ...additionalFields,
