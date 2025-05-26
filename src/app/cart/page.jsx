@@ -1,6 +1,6 @@
 'use client';
 
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartItem from '@/components/cart/cartItem';
 import SuggestedProducts from '@/components/cart/SuggestedProducts';
 import EmptyCart from '@/components/cart/emptyCart';
@@ -10,34 +10,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from '@/redux/features/cart/cartThunk';
 const CartPage = () => {
   const dispatch = useDispatch();
-  const { items,totalItems, loading, error } = useSelector((state) => state.cart);
+  const { items, totalItems } = useSelector((state) => state.cart);
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(getCart())
   }, []);
 
 
   return (
     <ProtectedRoute>
-    <div className="max-w-4xl mx-auto my-40 p-4 md:p-6">
-      <h2 className="text-2xl font-semibold">Cart ({totalItems})</h2>
+      <div className="max-w-4xl mx-auto my-40 p-4 md:p-6">
+        <h2 className="text-2xl font-semibold">Cart ({totalItems})</h2>
 
-      {totalItems== 0 ? (
-        <EmptyCart />
-      ) : (
-        <div className=" mt-6 space-y-6">
-          {items?.map((item,index) => (
-            <CartItem key={index} item={item}  />
-          ))}
+        {totalItems == 0 ? (
+          <EmptyCart />
+        ) : (
+          <div className=" mt-6 space-y-6">
+            {items?.filter(item => item.tool !== null).map((item, index) => (
+              <CartItem key={item._id || index} item={item} />
+            ))}
+
             <div className='mt-10'>
-            <Button title="Checkout" link="/checkout" className="w-full mt-10 py-2" />
+              <Button title="Checkout" link="/checkout" className="w-full mt-10 py-2" />
             </div>
-        </div>
-      )}
+          </div>
+        )}
 
-      <SuggestedProducts />
+        {/*<SuggestedProducts/>*/}
       </div>
-      </ProtectedRoute>
+    </ProtectedRoute>
   );
 };
 

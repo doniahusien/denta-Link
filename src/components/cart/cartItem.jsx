@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { Trash2, Plus, Minus } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { decrementCartItem, removeCartItem } from '@/redux/features/cart/cartThunk';
-import { incrementCartItem } from '@/redux/features/cart/cartThunk';
+import { removeCartItem } from '@/redux/features/cart/cartThunk';
+import { addToCart } from '@/redux/features/cart/cartThunk';
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   return (
@@ -12,21 +12,26 @@ const CartItem = ({ item }) => {
       </div>
       <div className="flex-1 text-center md:text-left">
         <h3 className="text-lg font-semibold">{item.tool.toolName}</h3>
-        <p className="text-gray-600">{item.tool.description}</p>
-        <p className="text-blue-600 font-semibold">{item.itemTotalPrice} LE</p>
+        <p className="text-gray-600">{/*item.tool.description*/}Good tool</p>
+        <p className="text-blue-600 font-semibold">{item.tool.price} LE</p>
       </div>
       <div className="flex items-center space-x-2">
-        <button className="p-1 border rounded" onClick={() =>
-          dispatch(decrementCartItem(item.tool._id))}>
-          <Minus size={16} />
-        </button>
-        <span className="px-2">{item.quantity}</span>
-        <button className="p-1 border rounded" onClick={() =>
-          dispatch(incrementCartItem(item.tool._id))}>
+        <button
+          className="p-1 border rounded"
+          onClick={() =>
+            dispatch(addToCart({ toolId: item.tool._id, quantity: 1 }))
+          }
+        >
           <Plus size={16} />
         </button>
-        <button className="ml-2 text-red-600" onClick={() =>
-          dispatch(removeCartItem(item.tool._id))}>
+
+        <span className="px-2">{item.quantity}</span>
+        <button
+          className="ml-2 text-red-600"
+          onClick={() =>
+            dispatch(removeCartItem({ toolId: item.tool._id }))
+          }
+        >
           <Trash2 size={18} />
         </button>
       </div>

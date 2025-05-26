@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSuggestedItems } from '@/redux/features/cart/cartThunk';
 
 const SuggestedProducts = () => {
   const dispatch = useDispatch();
-  const { suggested } = useSelector((state) => state.cart);
+  //const { suggested } = useSelector((state) => state.cart);
   useEffect(() => {
    dispatch(getSuggestedItems())
   },[dispatch])
