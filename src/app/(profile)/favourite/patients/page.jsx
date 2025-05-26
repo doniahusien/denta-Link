@@ -5,14 +5,13 @@ import ContentBox from "@/components/UI/profile/ContentBox";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Card from "@/components/profile/ToolCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPatientFav } from "@/redux/features/profile/profileThunk";
-
+import { fetchFav } from "@/redux/features/profile/profileThunk";
 export default function FavPage() {
     const dispatch = useDispatch();
     const { loading, favouritePatients, error } = useSelector((state) => state.profile);
 
     useEffect(() => {
-        dispatch(fetchPatientFav());
+        dispatch(fetchFav());
     }, [dispatch]);
 
     if (loading) return <p className="text-gray-500">Loading...</p>;
