@@ -5,18 +5,14 @@ import { useState } from "react";
 import CartItem from "@/components/cart/cartItem";
 import Button from "@/components/UI/Button/Button";
 import { motion } from "framer-motion";
-import { getCart, getOrderSummary } from "@/redux/features/cart/cartThunk";
+import { getCart } from "@/redux/features/cart/cartThunk";
 import ProtectedRoute from "@/components/ProtectedRoute";
 const CheckoutPage = () => {
 
   const dispatch = useDispatch();
-  const { items,  productTotal,
-    deliveryFee,
-        discount,
-        total, loading, error } = useSelector((state) => state.cart);
+  const { items, total,loading, error } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(getCart())
-    dispatch(getOrderSummary())
   }
   , []);
 
@@ -52,17 +48,14 @@ const CheckoutPage = () => {
       >
         <h3 className="text-xl font-semibold">Order summary</h3>
         <div className="mt-2 space-y-2 text-gray-700">
-          <div className="flex justify-between">
-            <span>Product total</span>
-            <span>{productTotal} LE</span>
-          </div>
+       
           <div className="flex justify-between">
             <span>Delivery fee</span>
-            <span>{deliveryFee} LE</span>
+            <span>0 LE</span>
           </div>
           <div className="flex justify-between">
             <span>Discount</span>
-            <span>{discount} LE</span>
+            <span>0 LE</span>
           </div>
           <hr className="my-2" />
           <div className="flex justify-between font-semibold text-lg">

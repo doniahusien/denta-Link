@@ -16,14 +16,14 @@ const SpecificShopPage = () => {
             name: 'Curette',
             price: '200',
             description: 'for deep cleaning',
-            image: '/images/market/tool.svg'
+            image: ['/images/market/tool.svg']
         },
         {
             id: 2,
             name: 'Curette',
             price: '200',
             description: 'for deep cleaning',
-            image: '/images/market/tool.svg'
+            image: ['/images/market/tool.svg']
 
         },
         {
@@ -31,7 +31,7 @@ const SpecificShopPage = () => {
             name: 'Curette',
             price: '200',
             description: 'for deep cleaning',
-            image: '/images/market/tool.svg'
+            image: ['/images/market/tool.svg']
 
         }
     ];
