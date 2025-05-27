@@ -34,8 +34,6 @@ export const addToCart = createAsyncThunk(
     }
 );
 
-
-
 export const getCart = createAsyncThunk(
     'cart/getCart',
     async (_, { getState, rejectWithValue }) => {

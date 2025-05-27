@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMyTools, fetchFav, fetchPatientCases, updatePatient, fetchMyExchanges, updateExchange, updateTool, deleteExchange, deletePatientCase, deleteTool } from "@/redux/features/profile/profileThunk";
+import {fetchOrders, fetchMyTools, fetchFav, fetchPatientCases, updatePatient, fetchMyExchanges, updateExchange, updateTool, deleteExchange, deletePatientCase, deleteTool } from "@/redux/features/profile/profileThunk";
 
 const initialState = {
     favouritePatients: [],
@@ -8,6 +8,7 @@ const initialState = {
     mypatients: [],
     myExchanges: [],
     myTools: [],
+    myOrders: [],
     loading: false,
     error: null,
     success: false,
@@ -118,7 +119,19 @@ const profileSlice = createSlice({
                 state.myTools = state.myTools.filter(tool => tool.id !== action.payload);
                 state.loading = false;
             })
-
+            .addCase(fetchOrders.fulfilled, (state, action) => {
+                state.loading = false;
+                state.myOrders = action.payload.data;
+                state.error = null;
+            })
+            .addCase(fetchOrders.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchOrders.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

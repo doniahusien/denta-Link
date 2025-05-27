@@ -45,25 +45,25 @@ export default function Home() {
 
   const cases1 = [
     {
-      name: "Dr. Ahmed Abdelfatah",
+      name: " Ahmed Abdelfatah",
       location: "Mansoura",
       title: "Cavities",
       images: ["/images/Home/doctor.svg"]
     },
     {
-      name: "Dr. Ahmed",
+      name: "Ahmed",
       location: "Cairo",
       title: "Root Canal",
       images: ["images/Home/doctor.svg"]
     },
     {
-      name: "Dr. Sara",
+      name: "Sara",
       location: "Alexandria",
       title: "Teeth Whitening",
       images: ["images/Home/doctor.svg"]
     },
     {
-      name: "Dr. Ali",
+      name: "Ali",
       location: "Giza",
       title: "Braces",
       images: ["images/Home/doctor.svg"]

@@ -8,7 +8,6 @@ const initialState = {
     discount: 0,
     total: 0,
     totalItems: 0,
-    orders: [],
     loading: false,
     error: null,
     success: false,
@@ -73,19 +72,7 @@ const cartSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            .addCase(getMyOrders.fulfilled, (state, action) => {
-                state.loading = false;
-                state.orders = action.payload.orders;
-                state.error = null;
-            })
-            .addCase(getMyOrders.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(getMyOrders.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
+            
     }
 });
 export default cartSlice.reducer;

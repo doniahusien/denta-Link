@@ -302,3 +302,31 @@ export const fetchFav = createAsyncThunk(
         }
     }
 );
+export const fetchOrders = createAsyncThunk(
+    "profile/fetchOrders",
+    async (_, { rejectWithValue, getState }) => {
+        try {
+            const state = getState();
+            const token = state.auth.token;
+
+            const response = await fetch("https://backend-production-0555.up.railway.app/api/profile/orders/my-orders", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("API Error:", errorData);
+                throw new Error(errorData.message || "Failed to fetch orders");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Fetch Error:", error.message);
+            return rejectWithValue(error.message);
+        }
+    }
+);
