@@ -27,12 +27,12 @@ const CartItem = ({ item }) => {
 
         <span className="px-2">{item.quantity}</span>
         <button
-          className="ml-2 text-red-600"
+          className="p-1 border rounded"
           onClick={() =>
             dispatch(removeCartItem({ toolId: item.tool._id }))
           }
         >
-          <Trash2 size={18} />
+          <Minus size={18} />
         </button>
       </div>
     </div>
