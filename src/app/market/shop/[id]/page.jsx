@@ -18,13 +18,24 @@ const ToolDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { tool, loading, error } = useSelector((state) => state.tool);
+
+    const defaultReviews = [
+        {
+            user: "Unknown",
+            date: new Date().toLocaleDateString(),
+            comment: "No reviews yet.",
+            rating: 0,
+        },
+    ];
+
     const handleAddToCart = () => {
         if (id) {
-            dispatch(addToCart({ toolId: id, quantity: 1 }))
+            dispatch(addToCart({ toolId: id, quantity: 1 }));
         } else {
             console.error('Tool ID is undefined');
         }
-    }
+    };
+
     useEffect(() => {
         if (id) {
             dispatch(fetchToolById(id));
@@ -37,19 +48,20 @@ const ToolDetails = () => {
     if (error) return <p className="text-center py-20 text-red-500">Error: {error}</p>;
     if (!tool) return <p className="text-center py-20">No tool found.</p>;
 
+    const reviews = tool.reviews && tool.reviews.length > 0
+        ? tool.reviews.map((review) => ({
+            user: review.user || "Unknown",
+            date: new Date(review.createdAt).toLocaleDateString(),
+            comment: review.comment || "No comment",
+            rating: review.rating || 0,
+        }))
+        : defaultReviews;
+
     const publisher = {
-        name: 'Dentsply Sirona',
+        name: tool.createdBy?.name || 'Unknown',
         description:
             'One of the largest manufacturers of dental equipment and supplies. They produce everything from hand instruments to imaging systems.',
     };
-
-    const reviews = [
-        {
-            user: 'Roaa',
-            date: '12/10/2023',
-            comment: 'Excellent Quality and Precision – A Must-Have for Dental Professionals!',
-        },
-    ];
 
     const relatedProducts = [
         {
@@ -78,13 +90,11 @@ const ToolDetails = () => {
                     <div className="flex flex-col lg:flex-row gap-10 shadow-lg p-4 rounded-lg bg-white">
                         <div className="relative h-96 w-full lg:w-1/2">
                             <DetailImage
-                                image={
-                                    tool?.images
-                                }
+                                image={tool?.images}
                                 alt={tool?.toolName || "Tool image"}
                                 tool
                             />
-                            <Fav fav={tool.isFavoriteTool} toolId={id} />
+                            <Fav fav={tool.isFavTool} toolId={id} />
                         </div>
 
                         <DetailInfo
@@ -96,7 +106,6 @@ const ToolDetails = () => {
                         />
                     </div>
 
-
                     <div className="flex flex-col lg:flex-row gap-10 justify-between">
                         <PublisherInfo
                             publisher={publisher}
@@ -105,7 +114,10 @@ const ToolDetails = () => {
                         />
                         <div className="space-y-8 p-10 shadow-md">
                             <Reviews reviews={reviews} />
-                            <button onClick={handleAddToCart} className="w-full text-xl bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors">
+                            <button
+                                onClick={handleAddToCart}
+                                className="w-full text-xl bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors"
+                            >
                                 Add to cart
                             </button>
                         </div>
