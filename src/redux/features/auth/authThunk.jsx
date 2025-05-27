@@ -59,28 +59,30 @@ export const signupUser = createAsyncThunk(
 
 
 export const logoutUser = createAsyncThunk(
-    "auth/logoutUser",
-    async (token, thunkAPI) => {
-        try {
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/users/logout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-            });
+  "auth/logoutUser",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { auth } = getState();
+      const token = auth.token;
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Failed to logout");
-            }
+      const response = await fetch("https://backend-production-0555.up.railway.app/api/users/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-            return "Logout successful";
-        } catch (error) {
-            console.error("Logout error:", error.message);
-            return thunkAPI.rejectWithValue(error.message);
-        }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Logout failed");
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Logout error:", error.message);
+      return rejectWithValue(error.message);
     }
+  }
 );
 
 export const forgetPassword = createAsyncThunk(

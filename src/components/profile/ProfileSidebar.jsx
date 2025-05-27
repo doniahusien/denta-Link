@@ -5,6 +5,8 @@ import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch ,useSelector} from 'react-redux';
+import { logoutUser } from '@/redux/features/auth/authThunk';
 
 
 export const menuItems = [
@@ -17,7 +19,7 @@ export const menuItems = [
 
 export default function ProfileSidebar() {
   const pathname = usePathname();
-
+  const dispatch = useDispatch();
   return (
     <div className="w-full max-w-sm md:w-80">
       <div className="rounded-xl bg-white p-6 shadow-md relative">
@@ -91,7 +93,9 @@ export default function ProfileSidebar() {
           })}
 
           {/* Sign Out Button */}
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-red-600 hover:bg-red-50">
+          <button
+            onClick={()=>dispatch(logoutUser())}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-red-600 hover:bg-red-50">
             <Image 
               src="/images/icons/profile/logout.svg" 
               alt="Sign Out"

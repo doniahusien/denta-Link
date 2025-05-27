@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import EditForm from "./EditForm";
 import Fav from "../UI/Fav";
-import { Pencil, Trash2 } from "lucide-react"; // Use lucide icons
+import { Pencil, Trash2 } from "lucide-react"; 
 
 const Card = ({
   type,
@@ -11,7 +11,7 @@ const Card = ({
   name,
   additionalFields = [],
   onEdit,
-  onDelete, // NEW
+  onDelete,
   patientId,
   toolId,
   isFavorite = false
