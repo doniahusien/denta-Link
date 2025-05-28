@@ -12,7 +12,7 @@ const CartItem = ({ item }) => {
       </div>
       <div className="flex-1 text-center md:text-left">
         <h3 className="text-lg font-semibold">{item.tool.toolName}</h3>
-        <p className="text-gray-600">{/*item.tool.description*/}Good tool</p>
+        <p className="text-gray-600">{item.tool.description}</p>
         <p className="text-blue-600 font-semibold">{item.tool.price} LE</p>
       </div>
       <div className="flex items-center space-x-2">

@@ -91,6 +91,35 @@ export const removeCartItem = createAsyncThunk(
 );
 
 
+export const checkoutOrder = createAsyncThunk(
+  'cart/checkoutOrder',
+  async ({ email }, { getState, rejectWithValue }) => {
+    try {
+      const state = getState();
+      const token = state.auth.token;
+
+      const response = await fetch('https://backend-production-0555.up.railway.app/api/cart/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          paymentDetails: { email }, // use provided email
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Checkout failed');
+      }
+
+      const data = await response.json();
+      return data; 
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 
 

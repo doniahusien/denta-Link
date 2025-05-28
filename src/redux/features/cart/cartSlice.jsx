@@ -1,6 +1,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { addToCart, getMyOrders, getOrderSummary, getCart, removeCartItem, getSuggestedItems } from './cartThunk';
+import { addToCart, checkoutOrder, getOrderSummary, getCart, removeCartItem, getSuggestedItems } from './cartThunk';
 const initialState = {
     items: [],
     productTotal: 0,
@@ -11,6 +11,9 @@ const initialState = {
     loading: false,
     error: null,
     success: false,
+    clientSecret: null,
+    amount: 0,
+    orderId: null,
 };
 
 const cartSlice = createSlice({
@@ -34,7 +37,7 @@ const cartSlice = createSlice({
             .addCase(getCart.fulfilled, (state, action) => {
                 state.loading = false;
                 state.items = action.payload.items;
-                state.totalItems = 2;
+           
                 state.total = action.payload.totalPrice;
                 state.error = null;
             })
@@ -72,7 +75,23 @@ const cartSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            
+            .addCase(checkoutOrder.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(checkoutOrder.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
+                state.amount = action.payload.amount;
+                state.orderId= action.payload.orderId;
+                state.clientSecret = action.payload.clientSecret;
+            })
+            .addCase(checkoutOrder.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+
     }
 });
 export default cartSlice.reducer;
