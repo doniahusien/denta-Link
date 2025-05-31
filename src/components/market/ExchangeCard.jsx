@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import Fav from '../UI/Fav';
 import img from '../../../public/images/market/tooth.svg'
-const ExchangeCard = ({ name, toothName, exchangeWith, notes, contact, createdAt, imageSrc, isFavExchange, id }) => {
+const ExchangeCard = ({ name, toothName, exchangeWith, notes, contact, createdAt, imageSrc, isFavExchange, exchangeId }) => {
     return (
-        <div className="bg-white rounded-lg shadow-md p-3 w-full md:w-[500px] lg:w-[35%] relative">
+        <div className= "bg-white rounded-lg shadow-md p-3 w-full md:w-[500px] lg:w-[100%] relative">
             <div className="flex flex-col gap-10 sm:flex-col md:flex-row justify-between items-start mb-4">
                 <div>
                     <Image src={imageSrc || img} alt="Tooth icon" width={100} height={50} className="w-48 h-48 lg:w-32 lg:h-32" />
@@ -22,7 +22,7 @@ const ExchangeCard = ({ name, toothName, exchangeWith, notes, contact, createdAt
                     </p>
                 </div>
                 <div>
-                    <Fav fav={isFavExchange} exchangeId={id} />
+                    <Fav fav={isFavExchange} exchangeId={exchangeId} />
                 </div>
             </div>
 
