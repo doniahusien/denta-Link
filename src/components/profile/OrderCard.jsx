@@ -13,7 +13,7 @@ const OrderCard = ({ orderNumber, orderDate, totalAmount, imageSrc }) => {
           Order Date: <span className="font-semibold text-gray-800">{orderDate}</span>
         </p>
         <p className="text-sm text-gray-500">
-          Total Amount: <span className="font-semibold text-gray-800">{totalAmount}</span>
+          Total Price: <span className="font-semibold text-gray-800">{totalAmount} EL</span>
         </p>
       </div>
 
