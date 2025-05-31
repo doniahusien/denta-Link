@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-    analyzeAIMessage,
-    fetchAllChats,
-    fetchChatMessages,
-    deleteChat
-} from './aiThunks';
+import { analyzeAIMessage, fetchAllChats, fetchChatMessages, deleteChat } from './aiThunk';
 
 const initialState = {
     chats: [],
@@ -12,8 +7,11 @@ const initialState = {
     currentChatId: null,
     geminiResponse: '',
     imageUrl: '',
-    loading: false,
-    error: null
+    loadingChats: false,      
+    loadingMessages: false,   
+    error: null,             
+    sending: false,         
+    sendError: null         
 };
 
 const aiSlice = createSlice({
@@ -26,64 +24,71 @@ const aiSlice = createSlice({
             state.messages = [];
             state.currentChatId = null;
             state.error = null;
+            state.sending = false;
+            state.sendError = null;
         }
     },
     extraReducers: (builder) => {
-        // Analyze Message/Image
+        // Analyze Message/Image (message send)
         builder
             .addCase(analyzeAIMessage.pending, (state) => {
-                state.loading = true;
-                state.error = null;
+                state.sending = true;
+                state.sendError = null;
             })
             .addCase(analyzeAIMessage.fulfilled, (state, action) => {
-                state.loading = false;
+                state.sending = false;
                 state.geminiResponse = action.payload.geminiResponse;
                 state.imageUrl = action.payload.imageUrl;
                 state.currentChatId = action.payload.chatId;
+
+                // Optionally append new message directly if available
+                if (action.payload.message) {
+                    state.messages.push(action.payload.message);
+                }
             })
             .addCase(analyzeAIMessage.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
+                state.sending = false;
+                state.sendError = action.payload || 'Failed to send message';
             });
 
         // Fetch All Chats
         builder
             .addCase(fetchAllChats.pending, (state) => {
-                state.loading = true;
+                state.loadingChats = true;
                 state.error = null;
             })
             .addCase(fetchAllChats.fulfilled, (state, action) => {
-                state.loading = false;
+                state.loadingChats = false;
                 state.chats = action.payload;
             })
             .addCase(fetchAllChats.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingChats = false;
                 state.error = action.payload;
             });
 
         // Fetch Chat Messages
         builder
             .addCase(fetchChatMessages.pending, (state) => {
-                state.loading = true;
+                state.loadingMessages = true;
                 state.error = null;
             })
             .addCase(fetchChatMessages.fulfilled, (state, action) => {
-                state.loading = false;
+                state.loadingMessages = false;
                 state.messages = action.payload;
             })
             .addCase(fetchChatMessages.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingMessages = false;
                 state.error = action.payload;
             });
 
         // Delete Chat
         builder
             .addCase(deleteChat.pending, (state) => {
-                state.loading = true;
+                state.loadingChats = true;
                 state.error = null;
             })
             .addCase(deleteChat.fulfilled, (state, action) => {
-                state.loading = false;
+                state.loadingChats = false;
                 state.chats = state.chats.filter(chat => chat._id !== action.payload);
                 if (state.currentChatId === action.payload) {
                     state.currentChatId = null;
@@ -93,7 +98,7 @@ const aiSlice = createSlice({
                 }
             })
             .addCase(deleteChat.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingChats = false;
                 state.error = action.payload;
             });
     }
