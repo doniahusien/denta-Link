@@ -46,7 +46,7 @@ const LogInForm = () => {
 
                     <div>
                         <Label text="Password" />
-                        <Input type="text" name="password" value={password} onChange={handlePassword} />
+                        <Input type="password" name="password" value={password} onChange={handlePassword} />
                     </div>
                     {loginError && <p className="text-red-500 text-sm mt-2">{loginError}</p>}
 
