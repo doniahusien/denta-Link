@@ -66,7 +66,7 @@ const CheckoutPage = () => {
         </motion.div>
 
         {/* Confirm Button */}
-        {items.tool.length > 0 && (
+        {items?.tool?.length > 0 && (
           <motion.div
             className="mt-6 text-center"
             initial={{ opacity: 0, y: 10 }}
