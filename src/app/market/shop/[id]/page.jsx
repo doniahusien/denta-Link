@@ -44,7 +44,9 @@ const ToolDetails = () => {
         }
     }, [dispatch, id]);
 
-    if (loading) return <p className="text-center py-20">Loading tool details...</p>;
+    if (loading) return(    <div className="min-h-screen flex justify-center items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>)
     if (error) return <p className="text-center py-20 text-red-500">Error: {error}</p>;
     if (!tool) return <p className="text-center py-20">No tool found.</p>;
 
