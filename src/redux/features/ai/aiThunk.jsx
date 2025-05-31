@@ -1,68 +1,112 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
 export const analyzeAIMessage = createAsyncThunk(
     'aiTool/analyzeAIMessage',
-    async ({ message, image, chatId }, thunkAPI) => {
+    async ({ message, image, chatId }, { getState, rejectWithValue }) => {
         try {
+            const { auth } = getState();
+            const token = auth.token;
+
             const formData = new FormData();
             if (message) formData.append('message', message);
             if (image) formData.append('image', image);
             if (chatId) formData.append('chatId', chatId);
 
-            const response = await axios.post('/ai-tool/analyze', formData, {
+            const response = await fetch('https://backend-production-0555.up.railway.app/api/ai-tool/analyze', {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`,
                 },
+                body: formData,
             });
 
-            return response.data.data; 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error analyzing message');
+            }
+
+            const data = await response.json();
+            return data.data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || 'Error analyzing message'
-            );
+            return rejectWithValue(error.message);
         }
     }
 );
 
 export const fetchAllChats = createAsyncThunk(
     'aiTool/fetchAllChats',
-    async (_, thunkAPI) => {
+    async (_, { getState, rejectWithValue }) => {
         try {
-            const response = await axios.get('/ai-tool/chats');
-            return response.data.data;
+            const { auth } = getState();
+            const token = auth.token;
+
+            const response = await fetch('https://backend-production-0555.up.railway.app/api/ai-tool/chats', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error fetching chats');
+            }
+
+            const data = await response.json();
+            return data.data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || 'Error fetching chats'
-            );
+            return rejectWithValue(error.message);
         }
     }
 );
 
 export const fetchChatMessages = createAsyncThunk(
     'aiTool/fetchChatMessages',
-    async (chatId, thunkAPI) => {
+    async (chatId, { getState, rejectWithValue }) => {
         try {
-            const response = await axios.get(`/ai-tool/chats/${chatId}`);
-            return response.data.data;
+            const { auth } = getState();
+            const token = auth.token;
+
+            const response = await fetch(`https://backend-production-0555.up.railway.app/api/ai-tool/chats/${chatId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error fetching chat messages');
+            }
+
+            const data = await response.json();
+            return data.data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || 'Error fetching chat messages'
-            );
+            return rejectWithValue(error.message);
         }
     }
 );
 
 export const deleteChat = createAsyncThunk(
     'aiTool/deleteChat',
-    async (chatId, thunkAPI) => {
+    async (chatId, { getState, rejectWithValue }) => {
         try {
-            await axios.delete(`/ai-tool/chats/${chatId}`);
+            const { auth } = getState();
+            const token = auth.token;
+
+            const response = await fetch(`https://backend-production-0555.up.railway.app/api/ai-tool/chats/${chatId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error deleting chat');
+            }
+
             return chatId;
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || 'Error deleting chat'
-            );
+            return rejectWithValue(error.message);
         }
     }
 );
