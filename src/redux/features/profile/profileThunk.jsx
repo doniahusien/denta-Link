@@ -251,7 +251,7 @@ export const deleteTool = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/${toolId}`, {
+            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/tools/${toolId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
