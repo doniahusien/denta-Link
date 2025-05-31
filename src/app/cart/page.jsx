@@ -11,13 +11,18 @@ import { getCart } from '@/redux/features/cart/cartThunk';
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.cart);
+  const { items,loading } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(getCart());
   }, []);
-
-  // Filter out null tools
+   if (loading) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+        );
+    }   
   const filteredItems = items?.filter(item => item.tool !== null) || [];
 
   return (
