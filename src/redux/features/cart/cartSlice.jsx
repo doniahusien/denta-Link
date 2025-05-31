@@ -37,7 +37,7 @@ const cartSlice = createSlice({
             .addCase(getCart.fulfilled, (state, action) => {
                 state.loading = false;
                 state.items = action.payload.items;
-           
+        
                 state.total = action.payload.totalPrice;
                 state.error = null;
             })
