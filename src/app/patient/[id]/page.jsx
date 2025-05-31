@@ -22,8 +22,9 @@ const PatientDetails = () => {
   }, [dispatch, id]);
 
 
-  if (loading) return <p>Loading patient details...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return (    <div className="min-h-screen flex justify-center items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>);
   if (!patient) return <p>No patient found.</p>;
 
   return (
