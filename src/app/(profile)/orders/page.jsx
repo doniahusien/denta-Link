@@ -8,12 +8,29 @@ import { fetchOrders } from '@/redux/features/profile/profileThunk';
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  const { myOrders = [] } = useSelector((state) => state.profile); // Fallback to empty array
+  const { myOrders = [], loading } = useSelector((state) => state.profile);
   const imgsrc = "/images/Profile/mirror.svg";
 
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  const formatOrderDate = (dateString) => {
+    try {
+      const date = new Date(dateString);
+      return isNaN(date.getTime()) ? "Unknown Date" : date.toLocaleString();
+    } catch {
+      return "Unknown Date";
+    }
+  };
 
   return (
     <ProtectedRoute>
@@ -26,7 +43,7 @@ export default function ProfilePage() {
               <OrderCard
                 key={order.orderNumber}
                 orderNumber={order.orderNumber}
-                orderDate={new Date(order.createdAt).toLocaleString()}
+                orderDate={formatOrderDate(order.createdAt)}
                 totalAmount={order.totalPrice}
                 imageSrc={
                   order.items.find(item => item.tool?.images?.[0])?.tool.images[0] || imgsrc
