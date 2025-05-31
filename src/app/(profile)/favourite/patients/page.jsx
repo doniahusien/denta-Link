@@ -14,9 +14,13 @@ export default function FavPage() {
         dispatch(fetchFav());
     }, [dispatch]);
 
-    if (loading) return <p className="text-gray-500">Loading...</p>;
-    if (error) return <p className="text-red-500">{error}</p>;
-
+ if (loading) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+        );
+    }   
     return (
         <ProtectedRoute>
             <ContentBox title="Favorite Patients">
