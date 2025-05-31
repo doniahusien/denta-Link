@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['pouknleezgeebybauodo.supabase.co'], 
+        domains: ['pouknleezgeebybauodo.supabase.co','localhost', 'images.unsplash.com', 'cdn.pixabay.com', 'res.cloudinary.com'], 
     }
 };
 
