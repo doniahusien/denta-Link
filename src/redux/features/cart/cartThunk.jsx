@@ -105,7 +105,7 @@ export const checkoutOrder = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          paymentDetails: { email }, // use provided email
+          paymentDetails: { email }, 
         }),
       });
 
