@@ -22,7 +22,10 @@ const PatientList = () => {
             <h1 className="text-4xl my-12 sm:pl-10 md:pl-20">Patients</h1>
             <div className="flex flex-row flex-wrap justify-center gap-4 sm:px-20 md:px-0">
                 {loading ? (
-                    <Loader />
+
+        <div className="min-h-screen flex justify-center items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
                 ) : patients.length > 0 ? (
                     patients.map((patient) => (
                         <PatientCard
