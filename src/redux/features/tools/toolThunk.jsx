@@ -96,7 +96,6 @@ export const addTool = createAsyncThunk(
 
             if (!response.ok) {
                 const errorData = await response.json();
-                // Log the error message for debugging
                 console.error("Error response:", errorData);
                 throw new Error(errorData.message || "Failed to add tool");
             }

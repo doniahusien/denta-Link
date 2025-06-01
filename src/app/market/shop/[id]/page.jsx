@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +18,7 @@ const ToolDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { tool, loading, error } = useSelector((state) => state.tool);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const defaultReviews = [
         {
@@ -30,7 +31,11 @@ const ToolDetails = () => {
 
     const handleAddToCart = () => {
         if (id) {
-            dispatch(addToCart({ toolId: id, quantity: 1 }));
+            dispatch(addToCart({ toolId: id, quantity: 1 }))
+                .then(() => {
+                    setShowSuccess(true);
+                    setTimeout(() => setShowSuccess(false), 3000); // Hide after 3 seconds
+                });
         } else {
             console.error('Tool ID is undefined');
         }
@@ -44,9 +49,12 @@ const ToolDetails = () => {
         }
     }, [dispatch, id]);
 
-    if (loading) return(    <div className="min-h-screen flex justify-center items-center">
+    if (loading) return (
+        <div className="min-h-screen flex justify-center items-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-        </div>)
+        </div>
+    );
+    
     if (error) return <p className="text-center py-20 text-red-500">Error: {error}</p>;
     if (!tool) return <p className="text-center py-20">No tool found.</p>;
 
@@ -85,6 +93,12 @@ const ToolDetails = () => {
     return (
         <ProtectedRoute>
             <div className="max-w-7xl mx-auto py-44 px-4">
+                {showSuccess && (
+                    <div className="fixed top-20 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
+                        Item added to cart successfully!
+                    </div>
+                )}
+                
                 <div className="space-y-12">
                     <h2 className="text-3xl font-semibold">Product Details</h2>
 

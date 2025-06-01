@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import ContentBox from "@/components/UI/profile/ContentBox";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import ExchangeCard from "@/components/market/ExchangeCard";
+import ExchangeCard from "@/components/profile/ExchangeCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFav } from "@/redux/features/profile/profileThunk";
 
@@ -33,20 +33,20 @@ export default function ExchangeFavPage() {
     return (
         <ProtectedRoute>
             <ContentBox title="Favorite Exchanges">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 pt-5">
+                <div className="flex flex-row flex-wrap gap-2 pt-5">
                     {favouriteExchanges.length > 0 ? (
                         favouriteExchanges.map((exchange) => (
                             <ExchangeCard
                                 key={exchange._id}
                                 publisher={exchange.name}
-                                name={exchange.toothName}
+                                toothName={exchange.toothName}
                                 imageSrc={exchange.images[0]}
                                 exchangeWith={exchange.exchangeWith}
                                 notes={exchange.notes}
                                 contact={exchange.contact}
                                 createdAt={exchange.createdAt}
                                 exchangeId={exchange._id}
-                                isFavExchange={true}
+                                isFavorite={true}
                             />
                         ))
                     ) : (

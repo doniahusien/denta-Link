@@ -44,21 +44,21 @@ const ExchangeCard = ({
         <div className="mb-6 w-full m-auto px-4 sm:px-6 lg:px-8">
             <div className="relative  flex flex-col  md:flex-row items-center md:items-start gap-4 rounded-xl border border-blue-300 p-4 shadow-sm bg-white w-full max-w-4xl ">
                 {/* Image & Details Section */}
-                <div className="rounded-lg p-5  md:w-[500px] sm:w-96 lg:w-[1000px] relative mx-auto">
+                <div className="rounded-lg p-5  md:w-[500px] sm:w-96 lg:w-[1500px] relative mx-auto">
                     <div className="flex flex-col gap-2 sm:flex-row md:flex-row justify-between items-center md:items-start mb-4">
                         {/* Image Section */}
                         <div className="flex-shrink-0">
                             <Image
                                 src={imageSrc}
                                 alt="Tool image"
-                                width={200}
-                                height={200}
-                                className="md:w-40 md:h-40 lg:w-52 lg:h-52 sm:w-28 sm:h-28"
+                                width={70}
+                                height={70}
+                                className="md:w-40 md:h-40 lg:w-28 lg:h-28 sm:w-28 sm:h-28"
                             />
                         </div>
 
                         {/* Details */}
-                        <div className="lg:text-lg sm:text-sm space-y-2 sm:w-full sm:pl-4">
+                        <div className="lg:text-sm sm:text-sm space-y-2 sm:w-full sm:pl-4">
                             <p>
                                 <span className="font-semibold">Publisher:</span> {publisher}
                             </p>

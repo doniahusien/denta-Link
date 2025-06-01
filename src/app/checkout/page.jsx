@@ -66,7 +66,7 @@ const CheckoutPage = () => {
         </motion.div>
 
         {/* Confirm Button */}
-        {items?.tool?.length > 0 && (
+        
           <motion.div
             className="mt-6 text-center"
             initial={{ opacity: 0, y: 10 }}
@@ -75,8 +75,6 @@ const CheckoutPage = () => {
           >
             <Button title="Confirm" link="checkout2" className="w-full py-3 text-lg" />
           </motion.div>
-        )}
-
       </motion.div>
     </ProtectedRoute>
   );

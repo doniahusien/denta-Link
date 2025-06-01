@@ -11,7 +11,7 @@ import fileId from "../../../public/images/icons/fileId.svg";
 import { useDispatch ,useSelector} from 'react-redux';
 import { addTool } from '@/redux/features/tools/toolThunk';
 const ToolForm = () => {
-    const { error, success, loading } = useSelector((state) => state.patient);
+    const { error, success, loading } = useSelector((state) => state.tool);
     const dispatch = useDispatch();
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
