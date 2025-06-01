@@ -25,7 +25,7 @@ const ExchangeToolList = () => {
             <h1 className="text-4xl my-12 sm:pl-8 md:pl-16">Tools</h1>
             <div className="flex flex-wrap justify-center items-start gap-5">
                 {exchangeTools.map((tool) => (
-                    <ExchangeCard key={tool._id} id={tool._id} imageSrc={tool.images[0]} {...tool} />
+                    <ExchangeCard key={tool._id} exchangeId={tool._id} imageSrc={tool.images[0]} {...tool} />
                 ))}
             </div>
         </div>
