@@ -15,7 +15,7 @@ export const fetchAllTools = createAsyncThunk(
             if (!response.ok) {
                 const errorData = await response.json();
                 console.log(errorData.message);
-                
+
             }
             const data = await response.json();
             return data;
@@ -57,7 +57,7 @@ export const toggleFavorite = createAsyncThunk(
 
 export const fetchToolByName = createAsyncThunk(
     "tool/fetchToolByName",
-    async (tool, { rejectWithValue ,getState}) => {
+    async (tool, { rejectWithValue, getState }) => {
         try {
             const state = getState();
             const token = state.auth.token;
@@ -79,6 +79,9 @@ export const fetchToolByName = createAsyncThunk(
     }
 );
 
+
+
+
 export const addTool = createAsyncThunk(
     "tool/addTool",
     async (toolData, { rejectWithValue, getState }) => {
@@ -86,7 +89,7 @@ export const addTool = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/tools/add", {
+            const response = await fetch( "https://backend-production-0555.up.railway.app/api/tools/add", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -96,15 +99,12 @@ export const addTool = createAsyncThunk(
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error("Error response:", errorData);
                 throw new Error(errorData.message || "Failed to add tool");
             }
 
             const data = await response.json();
             return data;
         } catch (error) {
-            // Log the error to debug further
-            console.error("Error in addTool:", error.message);
             return rejectWithValue(error.message);
         }
     }
