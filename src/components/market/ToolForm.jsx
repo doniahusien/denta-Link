@@ -42,8 +42,8 @@ const ToolForm = () => {
         const toolData = new FormData();
         Object.keys(formData).forEach((key) => {
             if (key === "images") {
-                formData.image.forEach((image) => {
-                    toolData.append("images", image);
+                formData.image.forEach((i) => {
+                    toolData.append("images", i);
                 });
             } else {
                 toolData.append(key, formData[key]);
@@ -59,7 +59,7 @@ const ToolForm = () => {
     };
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
-        setFormData({ ...formData, images: [...formData.image, ...files] });
+        setFormData({ ...formData, image: [...formData.image, ...files] });
     };
 
     return (
