@@ -41,9 +41,9 @@ const ToolForm = () => {
         e.preventDefault();
         const toolData = new FormData();
         Object.keys(formData).forEach((key) => {
-            if (key === "images") {
+            if (key === "image") {
                 formData.image.forEach((i) => {
-                    toolData.append("images", i);
+                    toolData.append("image", i);
                 });
             } else {
                 toolData.append(key, formData[key]);
