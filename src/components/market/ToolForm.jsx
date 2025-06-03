@@ -134,7 +134,7 @@ const ToolForm = () => {
                                 ))}
                             </div>
                         )}
-                    </div>                    {Error && <p className="text-red-500 text-sm mt-2">{loginError}</p>}
+                    </div>
                     <div className="text-center">
                         <SubmitBtn text="Add" loading="" />
                     </div>
