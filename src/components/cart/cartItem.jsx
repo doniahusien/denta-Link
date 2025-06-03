@@ -8,7 +8,7 @@ const CartItem = ({ item }) => {
   return (
     <div className="flex flex-col md:flex-row items-center p-4 border rounded-lg shadow-sm space-y-4 md:space-y-0">
       <div className="w-24 h-24 flex-shrink-0">
-        <Image src={item.tool.images[0]} alt={item.tool.toolName} width={80} height={80} />
+        <Image src={item.tool.images[0]||item.tool.image[0]||"/images/market/tool.svg"} alt={item.tool.toolName} width={80} height={80} />
       </div>
       <div className="flex-1 text-center md:text-left">
         <h3 className="text-lg font-semibold">{item.tool.toolName}</h3>

@@ -4,6 +4,7 @@ import ToolCard from './ToolCard';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Loader from '../UI/Loader/Loader';
+import defultImg from '../../../public/images/market/tool.svg'
 import { fetchAllTools } from '@/redux/features/tools/toolThunk';
 import { useEffect } from 'react';
 const ToolList = () => {
@@ -28,7 +29,7 @@ return (
             {tools.map((tool, index) => (
                 <ToolCard
                     key={index}
-                    image={tool.images}
+                    image={tool.images||tool.image}
                     name={tool.toolName}
                     id={tool._id}
                     price={tool.price}

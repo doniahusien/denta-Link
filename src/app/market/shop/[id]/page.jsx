@@ -106,7 +106,7 @@ const ToolDetails = () => {
                     <div className="flex flex-col lg:flex-row gap-10 shadow-lg p-4 rounded-lg bg-white">
                         <div className="relative h-96 w-full lg:w-1/2">
                             <DetailImage
-                                image={tool?.images}
+                                image={tool?.images || tool?.image}
                                 alt={tool?.toolName || "Tool image"}
                                 tool
                             />

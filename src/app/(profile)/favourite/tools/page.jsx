@@ -39,7 +39,7 @@ export default function ToolFavPage() {
                                 key={tool._id}
                                 type="tool"
                                 name={tool.toolName}
-                                imageSrc={tool.images?.[0] || "/default-tool-image.png"}
+                                imageSrc={tool.images?.[0] || tool.image[0]}
                                 toolId={tool._id}
                                 additionalFields={[
                                     { label: "Price", value: tool.price },
