@@ -112,7 +112,7 @@ const ToolForm = () => {
                                 Choose Files
                                 <input
                                     type="file"
-                                    name="images"
+                                    name="image"
                                     accept=".jpg,.png"
                                     multiple
                                     className="hidden"
@@ -134,7 +134,7 @@ const ToolForm = () => {
                                 ))}
                             </div>
                         )}
-                    </div>                    {/*Error && <p className="text-red-500 text-sm mt-2">{loginError}</p>*/}
+                    </div>                    {Error && <p className="text-red-500 text-sm mt-2">{loginError}</p>}
                     <div className="text-center">
                         <SubmitBtn text="Add" loading="" />
                     </div>
