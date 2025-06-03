@@ -21,7 +21,7 @@ const ToolForm = () => {
         price: '',
         category: '',
         description: '',
-        images: [],
+        image: [],
     });
     useEffect(() => {
         if (success) {
@@ -31,7 +31,7 @@ const ToolForm = () => {
                 price: '',
                 category: '',
                 description: '',
-                images: [],
+                image: [],
             });
             setTimeout(() => setShowSuccessMessage(false), 3000);
         }
@@ -42,7 +42,7 @@ const ToolForm = () => {
         const toolData = new FormData();
         Object.keys(formData).forEach((key) => {
             if (key === "images") {
-                formData.images.forEach((image) => {
+                formData.image.forEach((image) => {
                     toolData.append("images", image);
                 });
             } else {
@@ -59,7 +59,7 @@ const ToolForm = () => {
     };
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
-        setFormData({ ...formData, images: [...formData.images, ...files] });
+        setFormData({ ...formData, images: [...formData.image, ...files] });
     };
 
     return (
@@ -121,9 +121,9 @@ const ToolForm = () => {
                             </label>
                         </div>
                         {/* Display Selected Images */}
-                        {formData.images?.length > 0 && (
+                        {formData.image?.length > 0 && (
                             <div className="mt-2 grid grid-cols-3 gap-2">
-                                {formData.images.map((file, index) => (
+                                {formData.image.map((file, index) => (
                                     <div key={index} className="relative">
                                         <img
                                             src={URL.createObjectURL(file)}
