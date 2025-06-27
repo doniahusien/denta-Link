@@ -7,7 +7,7 @@ export const addToCart = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch('https://backend-production-0555.up.railway.app/api/cart/add', {
+            const response = await fetch('https://backend-production-4059.up.railway.app/api/cart/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const getCart = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch('https://backend-production-0555.up.railway.app/api/cart', {
+            const response = await fetch('https://backend-production-4059.up.railway.app/api/cart', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const removeCartItem = createAsyncThunk(
         try {
             const token = getState().auth.token;
 
-            const response = await fetch('https://backend-production-0555.up.railway.app/api/cart/remove', {
+            const response = await fetch('https://backend-production-4059.up.railway.app/api/cart/remove', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export const checkoutOrder = createAsyncThunk(
       const state = getState();
       const token = state.auth.token;
 
-      const response = await fetch('https://backend-production-0555.up.railway.app/api/cart/checkout', {
+      const response = await fetch('https://backend-production-4059.up.railway.app/api/cart/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
