@@ -4,7 +4,7 @@ export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (credentials, thunkAPI) => {
         try {
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/users/login", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/users/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const signupUser = createAsyncThunk(
     async (formData, thunkAPI) => {
         try {
             const response = await fetch(
-                "https://backend-production-0555.up.railway.app/api/users/signup",
+                "https://backend-production-4059.up.railway.app/api/users/signup",
                 {
                     method: "POST",
                     body: formData,
@@ -65,7 +65,7 @@ export const logoutUser = createAsyncThunk(
       const { auth } = getState();
       const token = auth.token;
 
-      const response = await fetch("https://backend-production-0555.up.railway.app/api/users/logout", {
+      const response = await fetch("https://backend-production-4059.up.railway.app/api/users/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export const forgetPassword = createAsyncThunk(
     "auth/forgetPassword",
     async ({ email }, thunkAPI) => {
         try {
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/users/forget-password", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/users/forget-password", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export const verifyOtp = createAsyncThunk(
     "auth/verifyOtp",
     async ({ email, OTP }, thunkAPI) => {
         try {
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/users/verify-otp", {
+            const response = await fetch(https://backend-production-4059.up.railway.app/api/users/verify-otp", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export const resetPassword = createAsyncThunk(
     "auth/resetPassword",
     async ({ email, newPassword }, thunkAPI) => {
         try {
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/users/reset-password", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/users/reset-password", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
