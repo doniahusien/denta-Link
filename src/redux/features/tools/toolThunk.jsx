@@ -6,7 +6,7 @@ export const fetchAllTools = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/tools", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/tools", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const toggleFavorite = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/tools/toggle", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/tools/toggle", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ export const fetchToolByName = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/tools/search?query=${tool}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/tools/search?query=${tool}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export const addTool = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch( "https://backend-production-0555.up.railway.app/api/tools/add", {
+            const response = await fetch( "https://backend-production-4059.up.railway.app/api/tools/add", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -116,7 +116,7 @@ export const fetchToolById = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/tools/${id}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/tools/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
