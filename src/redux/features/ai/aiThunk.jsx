@@ -12,7 +12,7 @@ export const analyzeAIMessage = createAsyncThunk(
             if (image) formData.append('image', image);
             if (chatId) formData.append('chatId', chatId);
 
-            const response = await fetch('https://backend-production-0555.up.railway.app/api/ai-tool/analyze', {
+            const response = await fetch('https://backend-production-4059.up.railway.app/api/ai-tool/analyze', {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ export const fetchAllChats = createAsyncThunk(
             const { auth } = getState();
             const token = auth.token;
 
-            const response = await fetch('https://backend-production-0555.up.railway.app/api/ai-tool/chats', {
+            const response = await fetch('https://backend-production-4059.up.railway.app/api/ai-tool/chats', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -66,7 +66,7 @@ export const fetchChatMessages = createAsyncThunk(
             const { auth } = getState();
             const token = auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/ai-tool/chats/${chatId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/ai-tool/chats/${chatId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -92,7 +92,7 @@ export const deleteChat = createAsyncThunk(
             const { auth } = getState();
             const token = auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/ai-tool/chats/${chatId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/ai-tool/chats/${chatId}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,
