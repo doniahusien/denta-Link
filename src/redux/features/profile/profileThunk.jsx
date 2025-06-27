@@ -8,7 +8,7 @@ export const fetchPatientCases = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/profile/patients/my-patients", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/profile/patients/my-patients", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ export const updatePatient = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/patients/${patientId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/profile/patients/${patientId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ export const deletePatientCase = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/patients/${patientId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/profile/patients/${patientId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -96,7 +96,7 @@ export const fetchMyExchanges = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/profile/exchanges/my-exchanges", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/profile/exchanges/my-exchanges", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ export const updateExchange = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/exchanges/update/${exchangeId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/exchanges/update/${exchangeId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ export const deleteExchange = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/exchanges/${exchangeId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/profile/exchanges/${exchangeId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -192,7 +192,7 @@ export const fetchMyTools = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/profile/my-tools", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/profile/my-tools", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -220,7 +220,7 @@ export const updateTool = createAsyncThunk(
         try {
             const state = getState();
             const token = state.auth.token;
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/${toolId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/profile/${toolId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -251,7 +251,7 @@ export const deleteTool = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch(`https://backend-production-0555.up.railway.app/api/profile/tools/${toolId}`, {
+            const response = await fetch(`https://backend-production-4059.up.railway.app/api/profile/tools/${toolId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -281,7 +281,7 @@ export const fetchFav = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/profile/favorites", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/profile/favorites", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -309,7 +309,7 @@ export const fetchOrders = createAsyncThunk(
             const state = getState();
             const token = state.auth.token;
 
-            const response = await fetch("https://backend-production-0555.up.railway.app/api/profile/orders/my-orders", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/profile/orders/my-orders", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
