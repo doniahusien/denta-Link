@@ -115,7 +115,7 @@ export const verifyOtp = createAsyncThunk(
     "auth/verifyOtp",
     async ({ email, OTP }, thunkAPI) => {
         try {
-            const response = await fetch(https://backend-production-4059.up.railway.app/api/users/verify-otp", {
+            const response = await fetch("https://backend-production-4059.up.railway.app/api/users/verify-otp", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
